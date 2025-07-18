@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "hire_go.client", "hire_go.client\hire_go.client.esproj", "{C14F5FEB-E082-8BA8-7715-61D141F7BE33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hire_Go.Server", "Hire_Go.Server\Hire_Go.Server.csproj", "{49EBBD47-4DBC-4C34-A991-8B7FB21B029A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C14F5FEB-E082-8BA8-7715-61D141F7BE33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14F5FEB-E082-8BA8-7715-61D141F7BE33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14F5FEB-E082-8BA8-7715-61D141F7BE33}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C14F5FEB-E082-8BA8-7715-61D141F7BE33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14F5FEB-E082-8BA8-7715-61D141F7BE33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14F5FEB-E082-8BA8-7715-61D141F7BE33}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{49EBBD47-4DBC-4C34-A991-8B7FB21B029A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49EBBD47-4DBC-4C34-A991-8B7FB21B029A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49EBBD47-4DBC-4C34-A991-8B7FB21B029A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49EBBD47-4DBC-4C34-A991-8B7FB21B029A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0870364-8BA7-4603-9FFE-D2A3BF649CDD}
+	EndGlobalSection
+EndGlobal
