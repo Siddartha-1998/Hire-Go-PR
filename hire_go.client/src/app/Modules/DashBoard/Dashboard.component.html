@@ -1,0 +1,99 @@
+<!-- dashboard.component.html -->
+<div class="dashboard-container">
+  <h2>Hiring Dashboard</h2>
+
+  <!-- In-Hand Company Section -->
+  <div class="company-list card">
+    <h3 (click)="toggleCompanyView()" style="cursor: pointer;">
+      In-Hand Company List
+    </h3>
+
+    <!-- LIST View -->
+    
+
+    <!-- GRID View -->
+    <div class="company-grid" *ngIf="isGridView">
+      <div class="company-card" *ngFor="let company of inHandCompanies">
+        <h4>{{ company.name }}</h4>
+        <p><strong>Status:</strong> {{ company.status }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Stats -->
+  <div class="dashboard-grid">
+    <div class="card">
+      <h3>Total Applications</h3>
+      <p>{{ totalApplications }}</p>
+    </div>
+    <div class="card">
+      <h3>Shortlisted</h3>
+      <p>{{ shortlisted }}</p>
+    </div>
+    <div class="card">
+      <h3>Interviews Scheduled</h3>
+      <p>{{ interviews }}</p>
+    </div>
+    <div class="card">
+      <h3>Hired</h3>
+      <p>{{ hired }}</p>
+    </div>
+  </div>
+
+  <button (click)="viewReports()">View Reports</button>
+</div>
+
+<style>
+  /* dashboard.component.css */
+  .dashboard-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  .card {
+    background-color: #f4f6f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .chart-container {
+    margin-top: 30px;
+  }
+
+  .user-details, .company-list {
+    margin-bottom: 20px;
+  }
+
+    .company-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .company-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+  .company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+  }
+
+  .company-card {
+    background-color: #e8f0fe;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+</style>
