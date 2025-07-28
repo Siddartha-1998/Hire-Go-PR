@@ -6,16 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ViewReportsComponent } from './Modules/Reports/viewReports.component';
 import { DashboardComponent } from './Modules/DashBoard/Dashboard.component';
+import { LoginComponent } from './Modules/LoginDashboard/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     ViewReportsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule,
+    FormsModule
     
   ],
   providers: [],

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+  import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import { CoredateService } from '../../../core/CoredateService';
 
 // Register chart components
 Chart.register(
@@ -36,7 +37,7 @@ Chart.register(
 export class DashboardComponent implements OnInit {
     isGridView: boolean=false;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
   totalApplications = 125;
   shortlisted = 40;
   interviews = 20;
@@ -71,6 +72,7 @@ export class DashboardComponent implements OnInit {
   }
 
   viewReports() {
+    this.CoreDataservice.Fetch("Jobdetails", "test", "Fetch");
     this.router.navigate(['/report'])
   }
   toggleCompanyView() {

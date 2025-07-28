@@ -13,7 +13,7 @@ const httpOptions = {
 
 export class CoredateService {
   result: any;
-  api = "https://localhost:7126/Host";
+  api = "https://55h3jgp0-7107.inc1.devtunnels.ms/Host";
   constructor(private http: HttpClient) {
 
   }
