@@ -1,39 +1,60 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-// Add services to the container.
-
-var app = builder.Build();
-
-app.UseDefaultFiles();
-app.MapStaticAssets();
-
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
+namespace AngularApp1.Server
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-});
+            // Add services to the container
+            builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
 
-app.MapFallbackToFile("/index.html");
+            // CORS Configuration (Define BEFORE app.Build())
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    policy =>
+                    {
+                        policy.WithOrigins("https://localhost:61467") // Angular Frontend URL
+                              .AllowAnyMethod()
+                              .AllowAnyHeader();
+                    });
+            });
+            var config = new ConfigurationBuilder()
+                     .AddJsonFile("appsettings.json")
+                     .Build();
 
-app.Run();
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            // Console.WriteLine($"Connection string: {connectionString}");
+            var app = builder.Build();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            // Enable CORS (Before Authorization & Controller Mapping)
+            app.UseCors(MyAllowSpecificOrigins);
+
+            // Configure the HTTP request pipeline
+            if (app.Environment.IsDevelopment())
+            {
+                // Enable Swagger or logging if needed
+            }
+
+            app.UseHttpsRedirection(); // If causing issues, comment this out
+
+            app.UseAuthorization();
+            app.MapControllers();
+
+            app.MapFallbackToFile("/index.html");
+
+            app.Run();
+        }
+    }
 }
