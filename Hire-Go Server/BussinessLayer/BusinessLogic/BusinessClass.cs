@@ -24,11 +24,11 @@ namespace Project1.Server
 
         }
 
-        public string fetch(object payload, string classname)
+        public string Fetch(object payload, string classname)
         {
 
             var logic = GetBusinessLogic(classname);
-            logic.fetch(payload, classname);
+            logic.Fetch(payload, classname);
             return JsonConvert.SerializeObject(logic);
         }
 

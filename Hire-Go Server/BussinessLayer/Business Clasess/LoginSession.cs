@@ -1,17 +1,36 @@
-﻿using Project1.Server.BussinessLayer.Interface;
+﻿using Newtonsoft.Json;
+using Project1.Server.BussinessLayer.Interface;
 
 namespace Hire_Go_Server
 {
+    [Serializable]
     public class LoginSession : IBussinessinterface
     {
+        Context _ctx = new Context();
+        public string  LoginAccess { get; set; }
         public string Delete(string obj, string classname)
         {
             throw new NotImplementedException();
         }
 
-        public string fetch(object obj, string classname)
+        public string Fetch(object obj, string classname)
         {
-            throw new NotImplementedException();
+            if (obj != null)
+            {
+                string data = obj.ToString();
+                var sessions = JsonConvert.DeserializeObject<List<loginsessiondetails>>(data);
+                foreach (var login in sessions) { 
+                    var criteria = _ctx.loginsessionDetails.Where(c=>c.username==login.username && c.password==login.password).FirstOrDefault();
+                    if (criteria != null) {
+                        LoginAccess = "Granted";
+                    }
+                    else
+                    {
+                        LoginAccess = "Denied";
+                    }
+                }
+            }
+            return LoginAccess;
         }
 
         public string FetchAll(string obj, string classname)
@@ -33,5 +52,11 @@ namespace Hire_Go_Server
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class loginsessiondetails
+    {
+        public string username {  get; set; }
+        public string password { get; set; }
     }
 }

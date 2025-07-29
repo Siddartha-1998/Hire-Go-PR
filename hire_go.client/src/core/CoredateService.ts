@@ -36,19 +36,20 @@ export class CoredateService {
 
   Insert(classname: any, obj: any, type: any): any {
     /* <WeatherForecast[]>*/
-    try {
-      this.http.get(this.api + "?classname=" + classname + "&obj=" + obj + "&type=" + type, httpOptions).subscribe(
-        (response) => {
-          this.result = response;
-        },
-        (error) => {
+    this.http.get(this.api + "?classname=" + classname + "&obj=" + obj + "&type=" + type, httpOptions).subscribe(
+      (response) => {
+        try {
+          this.result = JSON.parse(response.toString());
+        } catch (e) {
+          console.error('Failed to parse JSON response', e);
+          this.result = null;
         }
-      );
-    }
-    catch (ex)
-    {
+      },
+      (error) => {
+        console.error('API Error:', error);
+      }
+    );
 
-    }
     return this.result;
   }
   Update(classname: any, obj: any, type: any): any {

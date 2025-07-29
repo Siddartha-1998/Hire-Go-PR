@@ -29,7 +29,7 @@ public class HostController : ControllerBase
                     break;
                 case "Fetch":
                     instance = new BusinessClass();
-                    result =  instance.fetch(obj, className);
+                    result =  instance.Fetch(obj, className);
                     break;
                 case "Search":
                     instance = new BusinessClass();

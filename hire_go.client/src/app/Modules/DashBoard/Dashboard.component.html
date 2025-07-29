@@ -1,5 +1,12 @@
 <!-- dashboard.component.html -->
-<div class="dashboard-container">
+
+<div>
+  <button class="btn" (click)="AddNewuser()">Add New user</button>
+  <div  *ngIf="Newuser">
+    <app-sidenav (close)="onSidenavClose()"></app-sidenav>
+  </div>
+</div>
+<div class="dashboard-container" *ngIf="!Newuser">
   <h2>Hiring Dashboard</h2>
 
   <!-- In-Hand Company Section -->
@@ -40,7 +47,7 @@
     </div>
   </div>
 
-  <button (click)="viewReports()">View Reports</button>
+  <!--<button (click)="viewReports()">View Reports</button>-->
 </div>
 
 <style>

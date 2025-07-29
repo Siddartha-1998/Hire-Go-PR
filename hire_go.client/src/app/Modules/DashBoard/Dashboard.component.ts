@@ -1,5 +1,5 @@
   import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   Chart,
@@ -36,7 +36,8 @@ Chart.register(
 })
 export class DashboardComponent implements OnInit {
     isGridView: boolean=false;
-
+    Newuser: boolean=false;
+  @Input() showSidenav: boolean = true;
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
   totalApplications = 125;
   shortlisted = 40;
@@ -79,7 +80,12 @@ export class DashboardComponent implements OnInit {
     this.isGridView = !this.isGridView;
   }
 
-
+  AddNewuser() {
+    this.Newuser = true;
+  }
+  onSidenavClose() {
+    this.Newuser = false;
+  }
+ 
   
-
 }

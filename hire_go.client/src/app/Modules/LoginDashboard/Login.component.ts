@@ -46,12 +46,17 @@ export class LoginComponent {
       this.loginText = "Interviewer Login";
       this.enableLoginPage = true;
     }
-    this.Submit()
   }
   Submit() {
-    var response = this.CoreDataservice.Insert("LoginSession", this.SessionLogins, "Insert")
-    if (response != null) {
-      alert("Login S")
+    this.router.navigate(['dashboard'])
+    let session = [];
+    session.push({username:this.SessionLogins.username,password:this.SessionLogins.password})
+    var response = this.CoreDataservice.Insert("LoginSession", JSON.stringify(session), "Fetch")
+    if (response?.LoginAccess =="Granted") {
+      this.router.navigate(['dashboard'])
+    }
+    else {
+      alert(response?.LoginAccess);
     }
     
   }

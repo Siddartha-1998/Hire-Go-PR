@@ -8,13 +8,15 @@ import { ViewReportsComponent } from './Modules/Reports/viewReports.component';
 import { DashboardComponent } from './Modules/DashBoard/Dashboard.component';
 import { LoginComponent } from './Modules/LoginDashboard/login.component';
 import { FormsModule } from '@angular/forms';
+import { sidenavComponent } from './Controls/sidenav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     ViewReportsComponent,
-    LoginComponent
+    sidenavComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

@@ -1,11 +1,11 @@
 
-<div class="role-icons">
+<div class="role-icons" *ngIf="!enableLoginPage">
   <div class="role" (click)="loginAccess('Admin')">
-    <img src="assets/admin.webp" />
+    <img src="assets/admin.png" />
     <label>Admin</label>
   </div>
   <div class="role" (click)="loginAccess('interview')">
-    <img src="assets/interview.jpg" />
+    <img src="assets/interview.jpg"/>
     <label>Interviewer</label>
   </div>
 </div>
@@ -15,10 +15,20 @@
 
 
 
-<div class="login-container">
+
+<div class="login-container" *ngIf="enableLoginPage">
   <div class="logo-container">
     <img src="assets/logo.png" alt="Hiring {{loginText}}" class="logo-img">
   </div>
+  <div>
+    <label>UserName</label>
+    <input type="text" [(ngModel)]="SessionLogins.username" />
+  </div>
+  <div>
+    <label>Password</label>
+    <input [(ngModel)]="SessionLogins.password" />
+  </div>
+  <button (click)="Submit()">Login</button>
 </div>
 <style>
 
