@@ -21,7 +21,7 @@ import { sidenavComponent } from './Controls/sidenav.component';
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
     
   ],
   providers: [],

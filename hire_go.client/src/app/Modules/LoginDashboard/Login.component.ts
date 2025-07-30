@@ -48,17 +48,25 @@ export class LoginComponent {
     }
   }
   Submit() {
-    this.router.navigate(['dashboard'])
     let session = [];
     session.push({username:this.SessionLogins.username,password:this.SessionLogins.password})
     var response = this.CoreDataservice.Insert("LoginSession", JSON.stringify(session), "Fetch")
-    if (response?.LoginAccess =="Granted") {
+     this.sleep(2000);
+    if (response != undefined) {
+      this.checkinpage(response);
+    }
+    
+  }
+  sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  checkinpage(event:any) {
+    if (event?.LoginAccess == "Granted") {
       this.router.navigate(['dashboard'])
     }
     else {
-      alert(response?.LoginAccess);
+      alert(event?.LoginAccess);
     }
-    
   }
 
 }

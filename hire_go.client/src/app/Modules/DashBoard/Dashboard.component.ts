@@ -3,27 +3,22 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   Chart,
-  PieController,
+  PolarAreaController,
   ArcElement,
-  BarController,
-  BarElement,
-  CategoryScale,
-  LinearScale,
   Tooltip,
-  Legend
+  Legend,
+  CategoryScale,
+  RadialLinearScale
 } from 'chart.js';
 import { CoredateService } from '../../../core/CoredateService';
 
-// Register chart components
 Chart.register(
-  PieController,
+  PolarAreaController,
   ArcElement,
-  BarController,
-  BarElement,
-  CategoryScale,
-  LinearScale,
   Tooltip,
-  Legend
+  Legend,
+  RadialLinearScale,
+  CategoryScale
 );
 
 
@@ -32,6 +27,7 @@ Chart.register(
 @Component({
   selector: 'app-Dashboard',
   templateUrl: './Dashboard.component.html',
+  styleUrl:'./Dashboard.component.css'
 
 })
 export class DashboardComponent implements OnInit {
@@ -45,7 +41,12 @@ export class DashboardComponent implements OnInit {
   hired = 5;
   user: any; inHandCompanies: any;
   ngOnInit() {
-
+    setTimeout(() => {
+      this.renderChart('chartTotal', this.totalApplications, '#42a5f5', 'Total Applications', 'doughnut');
+      this.renderChart('chartShortlisted', this.shortlisted, '#66bb6a', 'Shortlisted', 'pie');
+      this.renderChart('chartInterviews', this.interviews, '#ffa726', 'Interviews', 'bar');
+      this.renderChart('chartHired', this.hired, '#ab47bc', 'Hired', 'polarArea');
+    }, 0);
     this.user = {
       name: 'Siddartha Garigipati',
       email: 'siddartha@example.com',
@@ -64,12 +65,25 @@ export class DashboardComponent implements OnInit {
       { name: 'Infosys', status: 'Offer Received' },
     ];
   }
-  addApplicant() {
-    alert('Redirect to Add Applicant form');
-  }
-
-  scheduleInterview() {
-    alert('Open Schedule Interview window');
+  renderChart(canvasId: string, value: number, color: string, label: string, type: 'pie' | 'bar' | 'doughnut' | 'polarArea'): void {
+    new Chart(canvasId, {
+      type: type,
+      data: {
+        labels: [label, 'Remaining'],
+        datasets: [{
+          data: [value, this.totalApplications - value],
+          backgroundColor: [color, '#e0e0e0'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          tooltip: { enabled: true }
+        }
+      }
+    });
   }
 
   viewReports() {
@@ -79,13 +93,10 @@ export class DashboardComponent implements OnInit {
   toggleCompanyView() {
     this.isGridView = !this.isGridView;
   }
-
   AddNewuser() {
     this.Newuser = true;
   }
   onSidenavClose() {
     this.Newuser = false;
   }
- 
-  
 }

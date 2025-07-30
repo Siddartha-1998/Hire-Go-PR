@@ -40,8 +40,10 @@ namespace Hire_Go_Server
 
         public string Insert(string obj, string classname)
         {
-            throw new NotImplementedException();
+            
+            return null;
         }
+
 
         public string Search(string obj, string classname)
         {
