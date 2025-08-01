@@ -19,7 +19,7 @@ export class sidenavComponent implements OnInit {
   user = {
     Username: '',
     Password: '',
-    email: '',
+    Email: '',
     Roles: '',
     CompanyName: '',
     CompanyDetails: ''

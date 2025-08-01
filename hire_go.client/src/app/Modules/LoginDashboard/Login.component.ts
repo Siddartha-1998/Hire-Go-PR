@@ -49,11 +49,14 @@ export class LoginComponent {
   }
   Submit() {
     let session = [];
-    session.push({username:this.SessionLogins.username,password:this.SessionLogins.password})
+    session.push({userid:this.SessionLogins.username,password:this.SessionLogins.password})
     var response = this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetch")
     const parsedResponse = JSON.parse(response);
-    if (parsedResponse != undefined && parsedResponse.LoginAccess=="Granted") {
+    if (parsedResponse != undefined && parsedResponse.LoginAccess == "Granted") {
+      localStorage.setItem('Session', parsedResponse);
+      sessionStorage.setItem('Session', parsedResponse);
       this.router.navigate(['dashboard']);
+      var dta = this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetchall")
     }
   }
   sleep(ms: number): Promise<void> {

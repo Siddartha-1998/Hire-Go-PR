@@ -38,15 +38,15 @@ namespace Hire_Go_Server
                     datafound.UserID = companydetail.UserName;
                     datafound.Password = companydetail.Password;
                     _ctx.loginsessionDetails.Update(datafound);
-                   // _ctx.SaveChanges();
+                    _ctx.SaveChanges();
                 }
                 if (companydetail.UserName != null && companydetail.Password != null)
                 {
-                    loginsessiondetails login = new loginsessiondetails();
+                    LoginSessionDetails login = new LoginSessionDetails();
                     login.ID = Guid.NewGuid();
-                    login.username = companydetail.UserName;
-                    login.password = companydetail.Password;
-
+                    login.UserID = companydetail.UserName;
+                    login.Password = companydetail.Password;
+                    _ctx.loginsessionDetails.Add(login);
                     company_details company = new company_details();
                     company.CompanyID = Guid.NewGuid();
                     company.LoginSessionID = login.ID;
@@ -54,7 +54,7 @@ namespace Hire_Go_Server
                     company.CompanyDetails = companydetail.CompanyDetails;
                     company.Roles = companydetail.Roles;
                     _ctx.company_details.Add(company);
-                   // _ctx.SaveChanges();
+                   _ctx.SaveChanges();
                 }
 
 

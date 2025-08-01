@@ -27,7 +27,7 @@
     <!-- Role -->
     <div class="form-group">
       <label>Role</label>
-      <select [(ngModel)]="user.Role" name="role" required>
+      <select [(ngModel)]="user.Roles" name="role" required>
         <option value="Admin">Admin</option>
         <option value="User">User</option>
       </select>
@@ -42,7 +42,7 @@
     <!-- Company Details -->
     <div class="form-group">
       <label>Company Details</label>
-      <textarea [(ngModel)]="user.companyDetails" name="CompanyDetails" rows="3"></textarea>
+      <textarea [(ngModel)]="user.CompanyDetails" name="CompanyDetails" rows="3"></textarea>
     </div>
 
     <button type="submit">Save User</button>

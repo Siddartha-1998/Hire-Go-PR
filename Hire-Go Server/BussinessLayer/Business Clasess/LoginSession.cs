@@ -8,6 +8,7 @@ namespace Hire_Go_Server
     {
         Context _ctx = new Context();
         public string  LoginAccess { get; set; }
+        List<company_details> com = new List<company_details>();
         public string Delete(string obj, string classname)
         {
             throw new NotImplementedException();
@@ -18,11 +19,12 @@ namespace Hire_Go_Server
             if (obj != null)
             {
                 string data = obj.ToString();
-                var sessions = JsonConvert.DeserializeObject<List<loginsessiondetails>>(data);
+                var sessions = JsonConvert.DeserializeObject<List<LoginSessionDetails>>(data);
                 foreach (var login in sessions) { 
-                    var criteria = _ctx.loginsessionDetails.Where(c=>c.UserID==login.username && c.Password==login.password).FirstOrDefault();
+                    var criteria = _ctx.loginsessionDetails.Where(c=>c.UserID==login.UserID && c.Password==login.Password).FirstOrDefault();
                     if (criteria != null) {
                         LoginAccess = "Granted";
+                        
                     }
                     else
                     {
@@ -35,7 +37,8 @@ namespace Hire_Go_Server
 
         public string FetchAll(string obj, string classname)
         {
-            throw new NotImplementedException();
+
+            return null;
         }
 
         public string Insert(string obj, string classname)
@@ -54,12 +57,5 @@ namespace Hire_Go_Server
         {
             throw new NotImplementedException();
         }
-    }
-
-    public class loginsessiondetails
-    {
-        public Guid ID { get; set; }
-        public string username {  get; set; }
-        public string password { get; set; }
     }
 }

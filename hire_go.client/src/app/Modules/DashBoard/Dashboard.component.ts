@@ -64,6 +64,8 @@ export class DashboardComponent implements OnInit {
       { name: 'Microsoft', status: 'Scheduled Interview' },
       { name: 'Infosys', status: 'Offer Received' },
     ];
+
+    var data = this.CoreDataservice.ServerCall("DashBoard", "test", "Fetchall");
   }
   renderChart(canvasId: string, value: number, color: string, label: string, type: 'pie' | 'bar' | 'doughnut' | 'polarArea'): void {
     new Chart(canvasId, {
