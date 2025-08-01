@@ -50,23 +50,15 @@ export class LoginComponent {
   Submit() {
     let session = [];
     session.push({username:this.SessionLogins.username,password:this.SessionLogins.password})
-    var response = this.CoreDataservice.Insert("LoginSession", JSON.stringify(session), "Fetch")
-     this.sleep(2000);
-    if (response != undefined) {
-      this.checkinpage(response);
+    var response = this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetch")
+    const parsedResponse = JSON.parse(response);
+    if (parsedResponse != undefined && parsedResponse.LoginAccess=="Granted") {
+      this.router.navigate(['dashboard']);
     }
-    
   }
   sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  checkinpage(event:any) {
-    if (event?.LoginAccess == "Granted") {
-      this.router.navigate(['dashboard'])
-    }
-    else {
-      alert(event?.LoginAccess);
-    }
-  }
+ 
 
 }

@@ -20,7 +20,7 @@ namespace Hire_Go_Server
                 string data = obj.ToString();
                 var sessions = JsonConvert.DeserializeObject<List<loginsessiondetails>>(data);
                 foreach (var login in sessions) { 
-                    var criteria = _ctx.loginsessionDetails.Where(c=>c.username==login.username && c.password==login.password).FirstOrDefault();
+                    var criteria = _ctx.loginsessionDetails.Where(c=>c.UserID==login.username && c.Password==login.password).FirstOrDefault();
                     if (criteria != null) {
                         LoginAccess = "Granted";
                     }
@@ -58,6 +58,7 @@ namespace Hire_Go_Server
 
     public class loginsessiondetails
     {
+        public Guid ID { get; set; }
         public string username {  get; set; }
         public string password { get; set; }
     }

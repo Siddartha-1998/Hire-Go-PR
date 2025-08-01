@@ -8,13 +8,14 @@ using Project1.Server.BussinessLayer.Interface;
 [Route("[controller]")]
 public class HostController : ControllerBase
 {
+    Context _ctx = new Context();
     [HttpGet]
     public IActionResult Get(string className, string obj,string type)
     {
         IBussinessinterface instance = null;
         string result = string.Empty;
-
         
+
         if (className != null)
         {
             switch (type)
@@ -46,8 +47,11 @@ public class HostController : ControllerBase
             }
 
         }
-
+       this.ContextSavechanges();
         return Ok(result);
     }
-
+    public void ContextSavechanges()
+    {
+        _ctx.SaveChanges();
+    }
 }

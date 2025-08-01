@@ -17,15 +17,19 @@ export class sidenavComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router,public CoreDataservice: CoredateService) {}
 
   user = {
-    username: '',
-    password: '',
+    Username: '',
+    Password: '',
     email: '',
-    role: 'User'
+    Roles: '',
+    CompanyName: '',
+    CompanyDetails: ''
   };
 
   onSubmit() {
     this.close.emit();
-    var response = this.CoreDataservice.Insert("LoginSession", JSON.stringify(this.user), "Insert")
+    let DashboardCompanyList = [];
+    DashboardCompanyList.push(this.user)
+    var response = this.CoreDataservice.ServerCall("DashBoard", JSON.stringify(DashboardCompanyList), "Insert")
     this.router.navigate(['/dashboard']);
   }
   ngOnInit() {
