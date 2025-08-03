@@ -21,7 +21,9 @@ namespace Hire_Go_Server
 
         public string FetchAll(string obj, string classname)
         {
-            throw new NotImplementedException();
+            //var compaydta = -_ctx.company_details.Where(c=>c.UserName == );
+
+            return null;
         }
 
         public string Insert(string obj, string classname)
@@ -53,6 +55,7 @@ namespace Hire_Go_Server
                     company.CompanyName = companydetail.CompanyName;
                     company.CompanyDetails = companydetail.CompanyDetails;
                     company.Roles = companydetail.Roles;
+                    company.UserName = "Token" + companydetail.UserName;
                     _ctx.company_details.Add(company);
                    _ctx.SaveChanges();
                 }

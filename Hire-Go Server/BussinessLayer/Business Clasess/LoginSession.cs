@@ -23,13 +23,14 @@ namespace Hire_Go_Server
                 foreach (var login in sessions) { 
                     var criteria = _ctx.loginsessionDetails.Where(c=>c.UserID==login.UserID && c.Password==login.Password).FirstOrDefault();
                     if (criteria != null) {
-                        LoginAccess = "Granted";
+                        LoginAccess = "Granted" + criteria.UserID;
                         
                     }
                     else
                     {
                         LoginAccess = "Denied";
                     }
+                 
                 }
             }
             return LoginAccess;
@@ -37,8 +38,8 @@ namespace Hire_Go_Server
 
         public string FetchAll(string obj, string classname)
         {
-
-            return null;
+            
+            return JsonConvert.SerializeObject(com);
         }
 
         public string Insert(string obj, string classname)
