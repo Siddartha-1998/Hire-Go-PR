@@ -50,14 +50,19 @@ export class LoginComponent {
   Submit() {
     let session = [];
     session.push({userid:this.SessionLogins.username,password:this.SessionLogins.password})
-    var response = this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetch")
-    const parsedResponse = JSON.parse(response);
-    if (parsedResponse != undefined && parsedResponse.LoginAccess == "Granted" && this.loginText == "Admin Login") {
-      localStorage.setItem('Session', parsedResponse);
-      sessionStorage.setItem('Session', parsedResponse);
-      this.router.navigate(['dashboard']);
-      var dta = this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetchall")
-    }
+    this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetch")
+      .subscribe((response: any) => {
+         // Angular HttpClient already parses JSON
+        const parsedResponse = JSON.parse(response)
+
+        if (parsedResponse != undefined && parsedResponse.LoginAccess.includes("Granted") && this.loginText == "Admin Login") {
+          localStorage.setItem('Session', parsedResponse);
+          sessionStorage.setItem('Session', parsedResponse);
+          this.router.navigate(['dashboard']);
+          var dta = this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetchall")
+        }
+      });
+
   }
   sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));

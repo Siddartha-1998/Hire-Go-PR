@@ -8,7 +8,7 @@ namespace Hire_Go_Server
     {
         Context _ctx = new Context();
         public string  LoginAccess { get; set; }
-        List<company_details> com = new List<company_details>();
+        List<company_details> company = new List<company_details>();
         public string Delete(string obj, string classname)
         {
             throw new NotImplementedException();
@@ -23,8 +23,18 @@ namespace Hire_Go_Server
                 foreach (var login in sessions) { 
                     var criteria = _ctx.loginsessionDetails.Where(c=>c.UserID==login.UserID && c.Password==login.Password).FirstOrDefault();
                     if (criteria != null) {
-                        LoginAccess = "Granted" + criteria.UserID;
-                        
+                        LoginAccess = "Granted";
+                        var companydetails = _ctx.company_details.Where(c=>c.UserName == login.UserID).FirstOrDefault();
+                        if (companydetails != null)
+                        {
+                            company.Add(new company_details
+                            {
+                                CompanyID = companydetails.CompanyID,
+                                CompanyName = companydetails.CompanyName,
+                                CompanyDetails = companydetails.CompanyDetails,
+                                Roles = companydetails.Roles,
+                            });
+                        }
                     }
                     else
                     {
@@ -33,13 +43,13 @@ namespace Hire_Go_Server
                  
                 }
             }
-            return LoginAccess;
+            return JsonConvert.SerializeObject(company);
         }
 
         public string FetchAll(string obj, string classname)
         {
-            
-            return JsonConvert.SerializeObject(com);
+
+            return null;
         }
 
         public string Insert(string obj, string classname)
