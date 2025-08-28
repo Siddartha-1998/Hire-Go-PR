@@ -2,10 +2,9 @@
 
 public class Context : DbContext
 {
-    public DbSet<Product> Products { get; set; }
     public DbSet<LoginSessionDetails> loginsessionDetails { get; set; }
     public DbSet<company_details> company_details { get; set; }
-    public DbSet<MapView> mapview { get; set; }
+    public DbSet<InterviewerLogins> InterviewerLogins { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -23,8 +22,12 @@ public class Context : DbContext
             .WithOne(ls => ls.CompanyDetails)
             .HasForeignKey<company_details>(cd => cd.LoginSessionID)
             .OnDelete(DeleteBehavior.Cascade);
-
+        modelBuilder.Entity<InterviewerLogins>()
+        .ToTable("InterviewerLogin")
+         .Property(p => p.Id)
+        .ValueGeneratedOnAdd();
         base.OnModelCreating(modelBuilder);
     }
+
 
 }

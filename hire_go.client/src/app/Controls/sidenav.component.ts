@@ -29,7 +29,7 @@ export class sidenavComponent implements OnInit {
     this.close.emit();
     let DashboardCompanyList = [];
     DashboardCompanyList.push(this.user)
-    var response = this.CoreDataservice.ServerCall("DashBoard", JSON.stringify(DashboardCompanyList), "Insert")
+    var response = this.CoreDataservice.SaveCall("DashBoard", JSON.stringify(DashboardCompanyList), "Insert")
     this.router.navigate(['/dashboard']);
   }
   ngOnInit() {

@@ -20,25 +20,38 @@ namespace Hire_Go_Server
             {
                 string data = obj.ToString();
                 var sessions = JsonConvert.DeserializeObject<List<LoginSessionDetails>>(data);
-                foreach (var login in sessions) { 
-                    var criteria = _ctx.loginsessionDetails.Where(c=>c.UserID==login.UserID && c.Password==login.Password).FirstOrDefault();
-                    if (criteria != null) {
-                        LoginAccess = "Granted";
-                        var companydetails = _ctx.company_details.Where(c=>c.UserName == login.UserID).FirstOrDefault();
-                        if (companydetails != null)
+                foreach (var login in sessions) {
+                    if (login.Type == "Admin Login")
+                    {
+                        var criteria = _ctx.loginsessionDetails.Where(c => c.UserID == login.UserID && c.Password == login.Password).FirstOrDefault();
+                        if (criteria != null)
                         {
-                            company.Add(new company_details
+                            LoginAccess = "Granted";
+                            var companydetails = _ctx.company_details.Where(c => c.UserName == login.UserID).FirstOrDefault();
+                            if (companydetails != null)
                             {
-                                CompanyID = companydetails.CompanyID,
-                                CompanyName = companydetails.CompanyName,
-                                CompanyDetails = companydetails.CompanyDetails,
-                                Roles = companydetails.Roles,
-                            });
+                                company.Add(new company_details
+                                {
+                                    CompanyID = companydetails.CompanyID,
+                                    CompanyName = companydetails.CompanyName,
+                                    CompanyDetails = companydetails.CompanyDetails,
+                                    Roles = companydetails.Roles,
+                                });
+                            }
+                        }
+                        else
+                        {
+                            LoginAccess = "Denied";
                         }
                     }
                     else
                     {
-                        LoginAccess = "Denied";
+                        var criteria = _ctx.InterviewerLogins.Where(c => c.UserName == login.UserID && c.PasswordHash == login.Password).FirstOrDefault();
+                        if (criteria != null)
+                        {
+                            LoginAccess = "Granted";
+                        }
+
                     }
                  
                 }

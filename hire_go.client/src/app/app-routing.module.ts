@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { ViewReportsComponent } from './Modules/Reports/viewReports.component';
 import { DashboardComponent } from './Modules/DashBoard/Dashboard.component';
 import { LoginComponent } from './Modules/LoginDashboard/login.component';
+import { InterViewerDashboardComponent } from './Modules/InterViewerDashboard/InterviewerDashboard.component';
 
 
 
@@ -12,6 +13,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'report', component: ViewReportsComponent },
   { path: '', component: LoginComponent },
+  { path: 'interviewer', component: InterViewerDashboardComponent },
+
 
 ];
 

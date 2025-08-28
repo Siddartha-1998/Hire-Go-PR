@@ -51,7 +51,7 @@ export class LoginComponent {
   Submit() {
     let session = [];
     this.enableLoader = true;
-    session.push({userid:this.SessionLogins.username,password:this.SessionLogins.password})
+    session.push({userid:this.SessionLogins.username,password:this.SessionLogins.password,type:this.loginText})
     this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetch")
       .subscribe((response: any) => {
          // Angular HttpClient already parses JSON
@@ -61,7 +61,11 @@ export class LoginComponent {
           localStorage.setItem('Session', parsedResponse);
           sessionStorage.setItem('Session', parsedResponse);
           this.router.navigate(['dashboard']);
-          var dta = this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetchall")
+        }
+        else {
+          if (parsedResponse != undefined && parsedResponse.LoginAccess.includes("Granted") && this.loginText == "Interviewer Login") {
+            this.router.navigate(['interviewer']);
+          }
         }
       });
 
