@@ -14,6 +14,7 @@ export class LoginComponent {
   enableLoginPage: boolean = false;
   loginText: string = '';
   SessionLogins : login = new login();
+    enableLoader: boolean=false;
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -49,12 +50,13 @@ export class LoginComponent {
   }
   Submit() {
     let session = [];
+    this.enableLoader = true;
     session.push({userid:this.SessionLogins.username,password:this.SessionLogins.password})
     this.CoreDataservice.ServerCall("LoginSession", JSON.stringify(session), "Fetch")
       .subscribe((response: any) => {
          // Angular HttpClient already parses JSON
         const parsedResponse = JSON.parse(response)
-
+        this.enableLoader = false;
         if (parsedResponse != undefined && parsedResponse.LoginAccess.includes("Granted") && this.loginText == "Admin Login") {
           localStorage.setItem('Session', parsedResponse);
           sessionStorage.setItem('Session', parsedResponse);

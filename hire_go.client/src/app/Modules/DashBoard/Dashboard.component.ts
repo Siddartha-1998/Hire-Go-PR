@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
   }
 
   viewReports() {
-    this.CoreDataservice.Fetch("Jobdetails", "test", "Fetch");
+    this.CoreDataservice.ServerCall("Jobdetails", "test", "Fetch");
     this.router.navigate(['/report'])
   }
   toggleCompanyView() {
