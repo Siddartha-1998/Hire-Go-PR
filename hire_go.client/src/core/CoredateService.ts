@@ -41,6 +41,22 @@ export class CoredateService {
     );
   }
 
+  SaveCall(classname: any, obj: any, type: any): any {
+    /* <WeatherForecast[]>*/
+    try {
+      this.http.get(this.api + "?classname=" + classname + "&obj=" + obj + "&type=" + type, httpOptions).subscribe(
+        (response) => {
+          this.result = response;
+        },
+        (error) => {
+        }
+      );
+    }
+    catch (ex) {
+    }
+    return this.result;
+  }
+
  
 }
 
