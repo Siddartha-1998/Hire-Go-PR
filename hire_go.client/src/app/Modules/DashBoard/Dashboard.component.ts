@@ -101,4 +101,8 @@ export class DashboardComponent implements OnInit {
   onSidenavClose() {
     this.Newuser = false;
   }
+  AddCompaydetails() {
+    this.router.navigate(['/CompanyDetails']);
+  }
+
 }

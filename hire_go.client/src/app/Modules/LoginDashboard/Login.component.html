@@ -1,24 +1,14 @@
 
-<div *ngIf="enableLoader" class="spinner-container">
-  <div class="spinner"></div>
-  <p>Loading, please wait...</p>
-</div>
 <div class="role-icons" *ngIf="!enableLoginPage">
   <div class="role" (click)="loginAccess('Admin')">
     <img src="assets/admin.png" />
     <label>Admin</label>
   </div>
   <div class="role" (click)="loginAccess('interview')">
-    <img src="assets/interview.jpg"/>
+    <img src="assets/interview.jpg" />
     <label>Interviewer</label>
   </div>
 </div>
-
-
-
-
-
-
 
 <div class="login-container" *ngIf="enableLoginPage">
   <div class="logo-container">
@@ -33,6 +23,10 @@
     <input [(ngModel)]="SessionLogins.password" />
   </div>
   <button (click)="Submit()">Login</button>
+  <div *ngIf="enableLoader" class="overlay-inside">
+    <div class="spinner"></div>
+    <p>Loading, please wait...</p>
+  </div>
 </div>
 <style>
 
@@ -114,6 +108,7 @@
     margin-top: 5px;
     text-align: center;
   }
+
   .spinner-container {
     display: flex;
     flex-direction: column;
@@ -141,4 +136,18 @@
     }
   }
 
+  .overlay-inside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px; /* match login box */
+  }
 </style>

@@ -1,10 +1,7 @@
 <!-- dashboard.component.html -->
 
 <div>
-  <i class="btn" (click)="AddNewuser()" style="float: right" *ngIf="!Newuser">Add Company Details</i>
-  <div  *ngIf="Newuser">
-    <app-sidenav (close)="onSidenavClose()"></app-sidenav>
-  </div>
+  <i class="btn" (click)="AddCompaydetails()" style="float: right">Company Details</i>
 </div>
 <div class="dashboard-container" *ngIf="!Newuser">
   <h2>Hiring Dashboard</h2>

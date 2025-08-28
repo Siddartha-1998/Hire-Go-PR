@@ -8,6 +8,7 @@ namespace Hire_Go_Server
     {
         Context _ctx = new Context();
         public string  LoginAccess { get; set; }
+        List<company_details> com = new List<company_details>();
         public string Delete(string obj, string classname)
         {
             throw new NotImplementedException();
@@ -21,9 +22,13 @@ namespace Hire_Go_Server
 
         public string FetchAll(string obj, string classname)
         {
-            //var compaydta = -_ctx.company_details.Where(c=>c.UserName == );
+            var data = _ctx.company_details.ToList();
+            foreach (var item in data)
+            {
+                com.Add(item);
+            }
 
-            return null;
+            return JsonConvert.SerializeObject(com);
         }
 
         public string Insert(string obj, string classname)

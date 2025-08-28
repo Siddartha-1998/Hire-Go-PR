@@ -5,6 +5,7 @@ import { ViewReportsComponent } from './Modules/Reports/viewReports.component';
 import { DashboardComponent } from './Modules/DashBoard/Dashboard.component';
 import { LoginComponent } from './Modules/LoginDashboard/login.component';
 import { InterViewerDashboardComponent } from './Modules/InterViewerDashboard/InterviewerDashboard.component';
+import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails.component';
 
 
 
@@ -14,8 +15,7 @@ const routes: Routes = [
   { path: 'report', component: ViewReportsComponent },
   { path: '', component: LoginComponent },
   { path: 'interviewer', component: InterViewerDashboardComponent },
-
-
+  { path: 'CompanyDetails', component: CompanyDetailsComponent },
 ];
 
 @NgModule({

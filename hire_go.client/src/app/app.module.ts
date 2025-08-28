@@ -10,6 +10,7 @@ import { LoginComponent } from './Modules/LoginDashboard/login.component';
 import { FormsModule } from '@angular/forms';
 import { sidenavComponent } from './Controls/sidenav.component';
 import { InterViewerDashboardComponent } from './Modules/InterViewerDashboard/InterviewerDashboard.component';
+import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { InterViewerDashboardComponent } from './Modules/InterViewerDashboard/In
     ViewReportsComponent,
     sidenavComponent,
     LoginComponent,
-    InterViewerDashboardComponent
+    InterViewerDashboardComponent,
+    CompanyDetailsComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

@@ -30,11 +30,11 @@ public class company_details
     public Guid CompanyID { get; set; }
     [ForeignKey("LoginSession")]
     public Guid LoginSessionID { get; set; }
-    public string CompanyName { get; set; }
-    public string CompanyDetails { get; set; }
-    public string Roles { get; set; }
-    public string UserName { get; set; }
-    public string Password { get; set; }
+    public string? CompanyName { get; set; }
+    public string? CompanyDetails { get; set; }
+    public string? Roles { get; set; }
+    public string? UserName { get; set; }
+    public string? Password { get; set; }
     public LoginSessionDetails LoginSession
     {
         get; set;

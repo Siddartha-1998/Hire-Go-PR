@@ -15,7 +15,8 @@ const httpOptions = {
 
 export class CoredateService {
   result: any;
-  api = "https://55h3jgp0-7107.inc1.devtunnels.ms/Host";
+  api = "https://rqf9cl8q-7107.inc1.devtunnels.ms/Host";//selvam
+  //api = "https://55h3jgp0-7107.inc1.devtunnels.ms/Host";//kowshik
   constructor(private http: HttpClient) {
 
   }

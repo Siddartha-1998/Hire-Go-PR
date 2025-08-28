@@ -1,0 +1,96 @@
+<div class="actions">
+  <!-- Add new user button -->
+  <button class="btn" (click)="AddNewuser()" *ngIf="!Newuser">+ Add User</button>
+  <button class="btn cancel" (click)="onSidenavClose()" *ngIf="Newuser">× Cancel</button>
+</div>
+
+<!-- Sidenav for new user form -->
+<div *ngIf="Newuser" class="sidenav-wrapper">
+  <app-sidenav (close)="onSidenavClose()" (save)="onUserSave($event)"></app-sidenav>
+</div>
+
+<!-- Search -->
+<div class="search-bar">
+  <button class="btn" (click)="datafetch()">Search</button>
+</div>
+
+<!-- Data Table -->
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Company Name</th>
+        <th>Company Details</th>
+        <th>User Role</th>
+        <th>User Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataList; let i = index">
+        <td>{{ item.CompanyName }}</td>
+        <td>{{ item.CompanyDetails }}</td>
+        <td>{{ item.Roles }}</td>
+        <td>{{ item.UserName }}</td>
+      </tr>
+      <tr *ngIf="dataList.length === 0">
+        <td colspan="4" class="no-data">No records found</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .search-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+    .btn.cancel {
+      background: #e74c3c;
+    }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Segoe UI", sans-serif;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background: #f5f5f5;
+  }
+
+  .no-data {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+  }
+
+  </style>
