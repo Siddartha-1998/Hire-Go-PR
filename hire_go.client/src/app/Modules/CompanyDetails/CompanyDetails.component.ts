@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from "@angular/router";
 import { CoredateService } from "../../../core/CoredateService";
+
 
 
 @Component({
@@ -9,6 +10,7 @@ import { CoredateService } from "../../../core/CoredateService";
   templateUrl: './CompanyDetails.component.html'
 })
 export class CompanyDetailsComponent implements OnInit {
+  @Output() close = new EventEmitter<void>();
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
   public dataList: any[] = [];
   Newuser: boolean = false;
@@ -33,6 +35,11 @@ export class CompanyDetailsComponent implements OnInit {
     // Assign parsed data to the class property
     this.dataList = parsedResponse;
   }
+  goBack() {
+    this.close.emit();
+    this.router.navigate(['/dashboard']);
+  }
+
 }
   
    
