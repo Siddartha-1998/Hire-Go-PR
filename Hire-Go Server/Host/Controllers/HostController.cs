@@ -44,6 +44,10 @@ public class HostController : ControllerBase
                     instance = new BusinessClass();
                     result = instance.Delete(obj, className);
                     break;
+                case "Single":
+                    instance = new BusinessClass();
+                    result = instance.Single(obj, className);
+                    break;
             }
 
         }

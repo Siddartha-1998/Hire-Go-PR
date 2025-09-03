@@ -63,6 +63,15 @@ namespace Project1.Server
 
             return data?.ToString() ?? string.Empty;
         }
+
+        public string Single(string obj, string classname)
+        {
+            var logic = GetBusinessLogic(classname);
+            var result = logic.Single(obj, classname);
+
+
+            return result;
+        }
         #endregion
     }
 

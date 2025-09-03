@@ -7,8 +7,8 @@ namespace Hire_Go_Server
     public class DashBoard : IBussinessinterface
     {
         Context _ctx = new Context();
-        public string  LoginAccess { get; set; }
-        List<company_details> com = new List<company_details>();
+        public string LoginAccess { get; set; }
+        List<company_details> companyDetails = new();
         public string Delete(string obj, string classname)
         {
             throw new NotImplementedException();
@@ -16,19 +16,28 @@ namespace Hire_Go_Server
 
         public string Fetch(object obj, string classname)
         {
-            
-            return LoginAccess;
+
+            var companydetails = JsonConvert.DeserializeObject<company_details>(obj.ToString());
+
+            var company_data = _ctx.company_details
+                                   .FirstOrDefault(c => c.CompanyID == companydetails.CompanyID);
+
+            if (company_data != null)
+            {
+                companyDetails.Add(company_data);
+            }
+
+            return JsonConvert.SerializeObject(companyDetails);
         }
 
         public string FetchAll(string obj, string classname)
         {
-            var data = _ctx.company_details.ToList();
-            foreach (var item in data)
+            var compaydta = _ctx.company_details.ToList();
+            foreach (var item in compaydta)
             {
-                com.Add(item);
+                companyDetails.Add(item);
             }
-
-            return JsonConvert.SerializeObject(com);
+            return JsonConvert.SerializeObject(companyDetails);
         }
 
         public string Insert(string obj, string classname)
@@ -36,10 +45,10 @@ namespace Hire_Go_Server
             string data = obj.ToString();
             var companydetails = JsonConvert.DeserializeObject<List<company_details>>(data);
 
-            foreach(var companydetail in companydetails)
+            foreach (var companydetail in companydetails)
             {
 
-                var datafound = _ctx.loginsessionDetails.Where(c => c.UserID == companydetail.UserName && c.Password==companydetail.Password).FirstOrDefault();
+                var datafound = _ctx.loginsessionDetails.Where(c => c.UserID == companydetail.UserName && c.Password == companydetail.Password).FirstOrDefault();
                 if (datafound != null)
                 {
                     datafound.UserID = companydetail.UserName;
@@ -62,7 +71,7 @@ namespace Hire_Go_Server
                     company.Roles = companydetail.Roles;
                     company.UserName = "Token" + companydetail.UserName;
                     _ctx.company_details.Add(company);
-                   _ctx.SaveChanges();
+                    _ctx.SaveChanges();
                 }
 
 
@@ -81,7 +90,21 @@ namespace Hire_Go_Server
         {
             throw new NotImplementedException();
         }
+
+        public string Single(string obj, string classname)
+        {
+            var compaydta = _ctx.company_details.ToList();
+            foreach (var item in compaydta)
+            {
+                companyDetails.Add(item);
+            }
+            return JsonConvert.SerializeObject(companyDetails);
+        }
+    }
+    public class CompanyWrapper
+    {
+        public List<company_details> companies { get; set; }
     }
 
-   
 }
+

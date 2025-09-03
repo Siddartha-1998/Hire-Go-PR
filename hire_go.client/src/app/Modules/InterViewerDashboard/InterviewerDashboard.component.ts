@@ -1,25 +1,7 @@
   import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  Chart,
-  PolarAreaController,
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  RadialLinearScale
-} from 'chart.js';
 import { CoredateService } from '../../../core/CoredateService';
-
-Chart.register(
-  PolarAreaController,
-  ArcElement,
-  Tooltip,
-  Legend,
-  RadialLinearScale,
-  CategoryScale
-);
 
 
 
@@ -30,15 +12,28 @@ Chart.register(
 
 })
 export class InterViewerDashboardComponent implements OnInit {
-    isGridView: boolean=false;
-    Newuser: boolean=false;
-  @Input() showSidenav: boolean = true;
+
+  companies: any[] = [];
+  loading: boolean = true;
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
 
   ngOnInit() {
-  
-
+    let session = [];
+    session.push({userid: "Test"});
+    this.CoreDataservice.ServerCall("DashBoard", JSON.stringify(session), "Fetchall")
+      .subscribe((response: any) => {
+        const parsedResponse = JSON.parse(response);
+        this.companies = parsedResponse;
+      });
+    
 
   }
-
+  viewInterviewers(company: any): void {
+    this.CoreDataservice.SaveCall("DashBoard", JSON.stringify(company), "Single")
+      .subscribe((result: any) => {
+        const parsedResponse = JSON.parse(result);
+        this.companies = parsedResponse;
+      });
+   
+  }
 }

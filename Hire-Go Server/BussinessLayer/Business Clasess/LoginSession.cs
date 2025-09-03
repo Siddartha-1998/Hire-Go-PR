@@ -7,7 +7,7 @@ namespace Hire_Go_Server
     public class LoginSession : IBussinessinterface
     {
         Context _ctx = new Context();
-        public string  LoginAccess { get; set; }
+        public string LoginAccess { get; set; }
         List<company_details> company = new List<company_details>();
         public string Delete(string obj, string classname)
         {
@@ -20,7 +20,8 @@ namespace Hire_Go_Server
             {
                 string data = obj.ToString();
                 var sessions = JsonConvert.DeserializeObject<List<LoginSessionDetails>>(data);
-                foreach (var login in sessions) {
+                foreach (var login in sessions)
+                {
                     if (login.Type == "Admin Login")
                     {
                         var criteria = _ctx.loginsessionDetails.Where(c => c.UserID == login.UserID && c.Password == login.Password).FirstOrDefault();
@@ -44,6 +45,17 @@ namespace Hire_Go_Server
                             LoginAccess = "Denied";
                         }
                     }
+                    else if (login.Type == "Register Admin")
+                    {
+                        LoginSessionDetails Register = new LoginSessionDetails();
+                        Register.UserID = login.UserID;
+                        Register.Password = login.Password;
+                        Register.Type = "Admin New";
+                        _ctx.loginsessionDetails.Add(Register);
+                        _ctx.SaveChanges();
+
+
+                    }
                     else
                     {
                         var criteria = _ctx.InterviewerLogins.Where(c => c.UserName == login.UserID && c.PasswordHash == login.Password).FirstOrDefault();
@@ -53,7 +65,7 @@ namespace Hire_Go_Server
                         }
 
                     }
-                 
+
                 }
             }
             return JsonConvert.SerializeObject(company);
@@ -67,7 +79,7 @@ namespace Hire_Go_Server
 
         public string Insert(string obj, string classname)
         {
-            
+
             return null;
         }
 
@@ -78,6 +90,11 @@ namespace Hire_Go_Server
         }
 
         public string Update(object obj, string classname)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Single(string obj, string classname)
         {
             throw new NotImplementedException();
         }

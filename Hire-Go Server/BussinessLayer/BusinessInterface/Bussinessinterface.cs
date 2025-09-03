@@ -9,6 +9,7 @@
         public string FetchAll(string obj, string classname);
 
         public string Delete(string obj, string classname);
+        public string Single(string obj, string classname);
 
 
     }

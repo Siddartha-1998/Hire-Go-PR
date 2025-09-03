@@ -6,11 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ViewReportsComponent } from './Modules/Reports/viewReports.component';
 import { DashboardComponent } from './Modules/DashBoard/Dashboard.component';
-import { LoginComponent } from './Modules/LoginDashboard/login.component';
+import { LoginComponent } from './Modules/LoginDashboard/Login.component';
 import { FormsModule } from '@angular/forms';
 import { sidenavComponent } from './Controls/sidenav.component';
 import { InterViewerDashboardComponent } from './Modules/InterViewerDashboard/InterviewerDashboard.component';
-import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -19,16 +19,18 @@ import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails
     ViewReportsComponent,
     sidenavComponent,
     LoginComponent,
-    InterViewerDashboardComponent,
-    CompanyDetailsComponent
+    InterViewerDashboardComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    
+
+
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
