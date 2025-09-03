@@ -16,17 +16,6 @@ namespace Hire_Go_Server
 
         public string Fetch(object obj, string classname)
         {
-
-            var companydetails = JsonConvert.DeserializeObject<company_details>(obj.ToString());
-
-            var company_data = _ctx.company_details
-                                   .FirstOrDefault(c => c.CompanyID == companydetails.CompanyID);
-
-            if (company_data != null)
-            {
-                companyDetails.Add(company_data);
-            }
-
             return JsonConvert.SerializeObject(companyDetails);
         }
 
@@ -93,11 +82,16 @@ namespace Hire_Go_Server
 
         public string Single(string obj, string classname)
         {
-            var compaydta = _ctx.company_details.ToList();
-            foreach (var item in compaydta)
+            var companydetails = JsonConvert.DeserializeObject<company_details>(obj.ToString());
+
+            var company_data = _ctx.company_details
+                                   .FirstOrDefault(c => c.CompanyID == companydetails.CompanyID);
+
+            if (company_data != null)
             {
-                companyDetails.Add(item);
+                companyDetails.Add(company_data);
             }
+
             return JsonConvert.SerializeObject(companyDetails);
         }
     }

@@ -15,6 +15,8 @@ export class InterViewerDashboardComponent implements OnInit {
 
   companies: any[] = [];
   loading: boolean = true;
+    disable: boolean=false;
+    companyInfo: any= [];
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
 
   ngOnInit() {
@@ -29,10 +31,11 @@ export class InterViewerDashboardComponent implements OnInit {
 
   }
   viewInterviewers(company: any): void {
-    this.CoreDataservice.SaveCall("DashBoard", JSON.stringify(company), "Single")
+    this.CoreDataservice.ServerCall("DashBoard", JSON.stringify(company), "Single")
       .subscribe((result: any) => {
         const parsedResponse = JSON.parse(result);
-        this.companies = parsedResponse;
+        this.companyInfo = parsedResponse;
+        this.disable = true;
       });
    
   }

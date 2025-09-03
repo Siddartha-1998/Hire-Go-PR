@@ -53,7 +53,18 @@ namespace Hire_Go_Server
                         Register.Type = "Admin New";
                         _ctx.loginsessionDetails.Add(Register);
                         _ctx.SaveChanges();
+                        LoginAccess = "Account Added SuccessFully!";
 
+
+                    }
+                    else if(login.Type == "Interviewer Register")
+                    {
+                        InterviewerLogins InterviewerLogins = new InterviewerLogins();
+                        InterviewerLogins.UserName = login.UserID;
+                        InterviewerLogins.PasswordHash = login.Password;
+                        _ctx.InterviewerLogins.Add(InterviewerLogins);
+                        _ctx.SaveChanges();
+                        LoginAccess = "Account Added SuccessFully!";
 
                     }
                     else

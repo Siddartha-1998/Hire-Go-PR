@@ -16,6 +16,7 @@ export class LoginComponent {
   SessionLogins : login = new login();
     enableLoader: boolean=false;
     disable: boolean=false;
+    enableSignupinterviewer: boolean=false;
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -40,18 +41,26 @@ export class LoginComponent {
     }
   }
   loginAccess(flag: any) {
-    if (flag == "Admin") {
+    if (flag == "Admin login") {
       this.loginText = "Admin Login";
       this.enableLoginPage = true;
-    }
-    else if(flag =="RegisterAdmin"){
-      this.loginText = "Register Admin";
-      this.enableLoginPage = true;
-      this.disable = true;
     }
     else {
       this.loginText = "Interviewer Login";
       this.enableLoginPage = true;
+      this.disable = false;
+
+    }
+  }
+
+  SignUp() {
+    if (this.loginText == "Admin Login") {
+      this.loginText = "Admin Register";
+      this.disable = true;
+    }
+    else {
+      this.loginText = "Interviewer Register";
+      this.enableSignupinterviewer = true;
       this.disable = true;
     }
   }

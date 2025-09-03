@@ -4,13 +4,10 @@
   <p>Loading, please wait...</p>
 </div>
 <div class="role-icons" *ngIf="!enableLoginPage">
-  <div class="role" (click)="loginAccess('Admin')">
-    <mat-icon>groups</mat-icon>
+  <div class="role" (click)="loginAccess('Admin login')">
     <label>Admin</label>
   </div>
-
-  <div class="role" (click)="loginAccess('interview')">
-    <img src="assets/interview.jpg" />
+  <div class="role" (click)="loginAccess('interview Login')">
     <label>Interviewer</label>
   </div>
 </div>
@@ -28,9 +25,8 @@
   <span>{{loginText}}</span>
   <input type="text" placeholder="UserName" [(ngModel)]="SessionLogins.username" />
   <input type="password" placeholder="Password" [(ngModel)]="SessionLogins.password" />
-  <i (click)="loginAccess('RegisterAdmin')" style="float:left;color:blue" *ngIf="!disable">SignUp</i>
+  <i style="float:left;color:blue" *ngIf="!disable" (click)="SignUp()">SignUp</i>
   <button (click)="Submit()">Login</button>
-
 </div>
 
 
