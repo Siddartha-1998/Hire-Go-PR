@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { sidenavComponent } from './Controls/sidenav.component';
 import { InterViewerDashboardComponent } from './Modules/InterViewerDashboard/InterviewerDashboard.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ViewReportsComponent,
     sidenavComponent,
     LoginComponent,
-    InterViewerDashboardComponent
+    InterViewerDashboardComponent,
+    s
   ],
   imports: [
     BrowserModule, HttpClientModule,

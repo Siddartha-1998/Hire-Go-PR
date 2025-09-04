@@ -10,6 +10,7 @@ import { DashboardComponent } from "./Modules/DashBoard/Dashboard.component";
 import { InterViewerDashboardComponent } from "./Modules/InterViewerDashboard/InterviewerDashboard.component";
 import { LoginComponent } from "./Modules/LoginDashboard/Login.component";
 import { ViewReportsComponent } from "./Modules/Reports/viewReports.component";
+import { CompanyDetailsComponent } from "./Modules/CompanyDetails/CompanyDetails.component";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ViewReportsComponent } from "./Modules/Reports/viewReports.component";
         ViewReportsComponent,
         sidenavComponent,
         LoginComponent,
-        InterViewerDashboardComponent
+    InterViewerDashboardComponent,
+    CompanyDetailsComponent
     ],
     imports: [
         BrowserModule, HttpClientModule,

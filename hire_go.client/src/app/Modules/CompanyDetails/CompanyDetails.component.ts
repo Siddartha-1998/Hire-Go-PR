@@ -6,7 +6,7 @@ import { CoredateService } from "../../../core/CoredateService";
 
 
 @Component({
-  selector: 'app-Dashboard',
+  selector: 'app-CompanyDetails',
   templateUrl: './CompanyDetails.component.html'
 })
 export class CompanyDetailsComponent implements OnInit {
@@ -30,10 +30,13 @@ export class CompanyDetailsComponent implements OnInit {
   datafetch() {
     let session = [];
     session.push(["userid"]);
-    var response = this.CoreDataservice.SaveCall("DashBoard", JSON.stringify(session), "Fetchall");
-    const parsedResponse = JSON.parse(response);
+    this.CoreDataservice.ServerCall("DashBoard", JSON.stringify(session), "Fetchall")
+      .subscribe((response: any) => {
+        const parsedResponse = JSON.parse(response);
+        this.dataList = parsedResponse;
+      });
     // Assign parsed data to the class property
-    this.dataList = parsedResponse;
+    
   }
   goBack() {
     this.close.emit();

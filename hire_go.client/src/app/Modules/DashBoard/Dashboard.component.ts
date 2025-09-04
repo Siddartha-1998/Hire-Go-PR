@@ -104,5 +104,7 @@ export class DashboardComponent implements OnInit {
   AddCompaydetails() {
     this.router.navigate(['/CompanyDetails']);
   }
-
+  logout() {
+    this.router.navigate(['']);
+  }
 }

@@ -58,7 +58,7 @@ namespace Hire_Go_Server
                     company.CompanyName = companydetail.CompanyName;
                     company.CompanyDetails = companydetail.CompanyDetails;
                     company.Roles = companydetail.Roles;
-                    company.UserName = "Token" + companydetail.UserName;
+                    company.UserName = companydetail.UserName;
                     _ctx.company_details.Add(company);
                     _ctx.SaveChanges();
                 }

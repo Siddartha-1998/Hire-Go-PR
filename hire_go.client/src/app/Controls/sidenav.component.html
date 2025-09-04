@@ -1,33 +1,33 @@
-
 <div class="sidenav">
   <div class="header">
     <button class="back-button" (click)="goBack()">← Back</button>
     <h2>Add Company Details</h2>
   </div>
 
-  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="form-card">
     <!-- Username -->
     <div class="form-group">
       <label>Username</label>
-      <input type="text" [(ngModel)]="user.Username" name="username" required />
+      <input type="text" [(ngModel)]="user.Username" name="username" required placeholder="Enter username" />
     </div>
 
     <!-- Password -->
     <div class="form-group">
       <label>Password</label>
-      <input type="password" [(ngModel)]="user.Password" name="password" required />
+      <input type="password" [(ngModel)]="user.Password" name="password" required placeholder="Enter password" />
     </div>
 
     <!-- Email -->
     <div class="form-group">
       <label>Email</label>
-      <input type="email" [(ngModel)]="user.Email" name="email" />
+      <input type="email" [(ngModel)]="user.Email" name="email" placeholder="Enter email" />
     </div>
 
     <!-- Role -->
     <div class="form-group">
       <label>Role</label>
       <select [(ngModel)]="user.Roles" name="role" required>
+        <option value="" disabled selected>Select Role</option>
         <option value="Admin">Admin</option>
         <option value="User">User</option>
       </select>
@@ -36,48 +36,127 @@
     <!-- Company Name -->
     <div class="form-group">
       <label>Company Name</label>
-      <input type="text" [(ngModel)]="user.CompanyName" name="companyName" required />
+      <input type="text" [(ngModel)]="user.CompanyName" name="companyName" required placeholder="Enter company name" />
     </div>
 
     <!-- Company Details -->
     <div class="form-group">
       <label>Company Details</label>
-      <textarea [(ngModel)]="user.CompanyDetails" name="CompanyDetails" rows="3"></textarea>
+      <textarea [(ngModel)]="user.CompanyDetails" name="CompanyDetails" rows="3" placeholder="Enter company details"></textarea>
     </div>
 
-    <button type="submit">Save User</button>
+    <div class="button-group">
+      <button type="submit" class="save-btn">💾 Save</button>
+      <button type="button" class="cancel-btn" (click)="goBack()">✖ Cancel</button>
+    </div>
   </form>
 </div>
 
 <style>
   .sidenav {
-    width: 300px;
-    padding: 20px;
-    background-color: #f1f1f1;
+    width: 400px;
+    padding: 25px;
+    background: #ffffff;
     height: 100vh;
     position: fixed;
-    left: 0;
+    right: 0;
     top: 0;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-    float: right
+    box-shadow: -2px 0 10px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+    .header h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #333;
+    }
+
+  .back-button {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #007bff;
+  }
+
+  .form-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    flex-grow: 1;
+    overflow-y: auto;
   }
 
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
   }
 
-  input, select {
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #444;
+  }
+
+  input, select, textarea {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-  }
-
-  button {
     padding: 10px;
-    width: 100%;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
   }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0,123,255,0.2);
+    }
+
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .save-btn {
+    flex: 1;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+    .save-btn:hover {
+      background: #0056b3;
+    }
+
+  .cancel-btn {
+    flex: 1;
+    padding: 10px;
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+    .cancel-btn:hover {
+      background: #bdbdbd;
+    }
 </style>

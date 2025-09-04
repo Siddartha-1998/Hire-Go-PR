@@ -1,13 +1,14 @@
 
 <!-- Sidenav for new user form -->
 <div *ngIf="Newuser" class="sidenav-wrapper">
-  <app-sidenav (close)="onSidenavClose()" (save)="onUserSave($event)"></app-sidenav>
+  <app-sidenav></app-sidenav>
 </div>
 <!-- Search -->
 <div class="actions-bar">
-  <button class="btn" (click)="AddNewuser()" *ngIf="!Newuser">+ Add User</button>
+  <button class="btn" (click)="AddNewuser()">+ Add User</button>
   <button class="btn cancel" (click)="onSidenavClose()" *ngIf="Newuser">× Cancel</button>
   <button class="btn" (click)="datafetch()">Search</button>
+  <button class="back btn" (click)="goBack()">← Back</button>
 </div>
 
 <!-- Data Table -->
@@ -33,10 +34,6 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<div class="left">
-  <button class="back btn" (click)="goBack()">← Back</button>
 </div>
 
 <style>
