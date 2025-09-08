@@ -11,32 +11,28 @@ import { CoredateService } from '../../../core/CoredateService';
   templateUrl: './InterviewerDashboard.component.html',
 
 })
-export class InterViewerDashboardComponent implements OnInit {
-
-  companies: any[] = [];
-  loading: boolean = true;
-    disable: boolean=false;
-    companyInfo: any= [];
+export class InterViewerDashboardComponent {
+  addnewprofile: boolean=false;
+  Menuhidden: boolean = false;
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
 
-  ngOnInit() {
-    let session = [];
-    session.push({userid: "Test"});
-    this.CoreDataservice.ServerCall("DashBoard", JSON.stringify(session), "Fetchall")
-      .subscribe((response: any) => {
-        const parsedResponse = JSON.parse(response);
-        this.companies = parsedResponse;
-      });
-    
+  isMenuOpen: boolean = true;
+  searchText: string = '';
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
-  viewInterviewers(company: any): void {
-    this.CoreDataservice.ServerCall("DashBoard", JSON.stringify(company), "Single")
-      .subscribe((result: any) => {
-        const parsedResponse = JSON.parse(result);
-        this.companyInfo = parsedResponse;
-        this.disable = true;
-      });
-   
+
+  goToAddProfile() {
+    this.addnewprofile = true;
+    this.Menuhidden = true;
+  }
+
+  goToViewProfile() {
+    alert("Navigate to View Profile page or section");
+  }
+
+  logout() {
+    this.router.navigate(['']);
   }
 }

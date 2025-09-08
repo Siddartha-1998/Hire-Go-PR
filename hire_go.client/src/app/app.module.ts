@@ -12,6 +12,9 @@ import { sidenavComponent } from './Controls/sidenav.component';
 import { InterViewerDashboardComponent } from './Modules/InterViewerDashboard/InterviewerDashboard.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails.component';
+import { LogOutComponent } from './Controls/Logout/Logout.component';
+import { Interviewercomponent } from './Controls/Interviewer side nav/Interviewer.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails
     sidenavComponent,
     LoginComponent,
     InterViewerDashboardComponent,
-    s
+    LogOutComponent,
+    Interviewercomponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

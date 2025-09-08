@@ -11,6 +11,8 @@ import { InterViewerDashboardComponent } from "./Modules/InterViewerDashboard/In
 import { LoginComponent } from "./Modules/LoginDashboard/Login.component";
 import { ViewReportsComponent } from "./Modules/Reports/viewReports.component";
 import { CompanyDetailsComponent } from "./Modules/CompanyDetails/CompanyDetails.component";
+import { Interviewercomponent } from "./Controls/Interviewer side nav/Interviewer.component";
+
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { CompanyDetailsComponent } from "./Modules/CompanyDetails/CompanyDetails
         sidenavComponent,
         LoginComponent,
     InterViewerDashboardComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    Interviewercomponent
+
     ],
     imports: [
         BrowserModule, HttpClientModule,

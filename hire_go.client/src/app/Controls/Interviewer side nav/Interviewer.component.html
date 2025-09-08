@@ -1,0 +1,75 @@
+<div class="profile-container">
+  <h2>User Profile</h2>
+
+  <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)" novalidate>
+
+    <!-- Profile Picture Upload -->
+    <div class="form-group profile-picture">
+      <label for="profilePic">Profile Picture</label>
+      <input type="file"
+             id="profilePic"
+             name="profilePic"
+             (change)="onProfilePicUpload($event)"
+             accept="image/*" />
+      <div *ngIf="profilePicUrl" class="preview">
+        <img [src]="profilePicUrl" alt="Profile Picture" />
+      </div>
+    </div>
+
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text"
+             id="name"
+             name="name"
+             [(ngModel)]="name"
+             required
+             placeholder="Enter your name" />
+    </div>
+
+    <!-- Phone -->
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="text"
+             id="phone"
+             name="phone"
+             [(ngModel)]="phone"
+             required
+             placeholder="Enter phone number" />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email"
+             id="email"
+             name="email"
+             [(ngModel)]="email"
+             required
+             placeholder="Enter email" />
+    </div>
+
+    <!-- Resume Upload -->
+    <div class="form-group">
+      <label for="resume">Upload Resume</label>
+      <input type="file"
+             id="resume"
+             name="resume"
+             (change)="onResumeUpload($event)"
+             accept=".pdf,.doc,.docx" />
+    </div>
+
+    <!-- View Resume -->
+    <div class="form-group" *ngIf="resumeUrl">
+      <a [href]="resumeUrl" target="_blank" rel="noopener noreferrer">
+        <button type="button">View Resume</button>
+      </a>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button type="submit">Save Profile</button>
+    </div>
+
+  </form>
+</div>
