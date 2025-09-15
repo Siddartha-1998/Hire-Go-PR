@@ -29,6 +29,7 @@ export class InterViewerDashboardComponent {
   }
 
   goToViewProfile() {
+    this.router.navigate(['interviewerProfile']);
     alert("Navigate to View Profile page or section");
   }
 

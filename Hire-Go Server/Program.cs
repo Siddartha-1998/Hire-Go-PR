@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.Features;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Add CORS
@@ -19,6 +21,10 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 104857600; // 100 MB limit
+});
 
 var app = builder.Build();
 

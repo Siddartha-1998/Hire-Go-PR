@@ -55,10 +55,17 @@ export class Interviewercomponent {
 
   onSubmit(form: any): void {
     if (form.valid) {
-      alert('Profile saved successfully!');
-      form.resetForm();
-      this.resumeUrl = null;
-      this.profilePicUrl = null;
+      //alert('Profile saved successfully!');
+
+      var ID = localStorage.getItem('SessionID')
+      let payload = []
+      payload.push({ name: this.name, phone: this.phone, email: this.email, resume: this.resumeUrl, sessionID: ID })
+      var dta = this.CoreDataservice.SaveCall("InterViewerdemographics", JSON.stringify(payload),"Insert")
+      alert("Your Profile is Uploaded SuccessFully !")
+      this.router.navigate(['']);
+
+     
+  
     } else {
       alert('Please fill all required fields.');
     }

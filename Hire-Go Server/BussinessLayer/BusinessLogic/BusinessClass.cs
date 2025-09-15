@@ -44,7 +44,7 @@ namespace Project1.Server
             var logic = GetBusinessLogic(classname);
             logic.Insert(obj,classname);
 
-            return JsonConvert.SerializeObject(null);
+            return JsonConvert.SerializeObject(logic);
         }
 
         public string Search(string obj, string classname)

@@ -78,9 +78,17 @@ export class LoginComponent {
           sessionStorage.setItem('Session', parsedResponse);
           this.router.navigate(['dashboard']);
         }
+        else if (this.loginText != "Interviewer Login") {
+          alert("Invalid Logins !")
+        }
         else {
-          if (parsedResponse != undefined && parsedResponse.LoginAccess.includes("Granted") && this.loginText == "Interviewer Login") {
+          if (parsedResponse != undefined && this.loginText == "Interviewer Login") {
+            localStorage.setItem('SessionID', parsedResponse.LoginAccess);
+            sessionStorage.setItem('SessionID', parsedResponse.LoginAccess);
             this.router.navigate(['interviewer']);
+          }
+          else {
+            this.router.navigate(['']);
           }
         }
       });

@@ -14,6 +14,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails.component';
 import { LogOutComponent } from './Controls/Logout/Logout.component';
 import { Interviewercomponent } from './Controls/Interviewer side nav/Interviewer.component';
+import { InterviewerProfileComponent } from './Controls/Interviewer Profile view/interviewerprofileview.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { Interviewercomponent } from './Controls/Interviewer side nav/Interviewe
     LoginComponent,
     InterViewerDashboardComponent,
     LogOutComponent,
-    Interviewercomponent
+    InterviewerProfileComponent,
+    Interviewercomponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

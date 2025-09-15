@@ -41,11 +41,50 @@ public class company_details
 
     }
 }
-public class InterviewerLogins
-{
-    public int Id { get; set; }  // auto-increment identity column
-    public string UserName { get; set; }
-    public string PasswordHash { get; set; }
-    public string? CreatedOn { get; set; }
 
+
+public class InterviewerLogin
+{
+    [Key]
+    public Guid ID { get; set; } // Uses Guid for UNIQUEIDENTIFIER
+
+    [Required]
+    [StringLength(255)]
+    public string Username { get; set; }
+
+    [Required]
+    [StringLength(255)]
+    public string Password { get; set; }
+
+    [Required]
+    public bool DeleteStatus { get; set; } = false;
+
+    // Navigation property for the one-to-one relationship
+    public InterviewerProfile ProfileDetails { get; set; }
+}
+
+
+
+public class InterviewerProfile
+{
+    [Key]
+    [ForeignKey("InterviewerLogin")]
+    public Guid InterviewerID { get; set; }
+
+    [Required]
+    [StringLength(255)]
+    public string Name { get; set; }
+
+    [Required]
+    [StringLength(255)]
+    public string Email { get; set; }
+
+    [StringLength(255)]
+    public string Resume { get; set; }
+
+    [StringLength(255)]
+    public string ProfilePic { get; set; }
+    public string PhoneNumber { get; set; }
+    // Navigation property for the one-to-one relationship
+    public InterviewerLogin InterviewerLogin { get; set; }
 }

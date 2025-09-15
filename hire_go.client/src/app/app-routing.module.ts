@@ -7,6 +7,7 @@ import { DashboardComponent } from './Modules/DashBoard/Dashboard.component';
 import { InterViewerDashboardComponent } from './Modules/InterViewerDashboard/InterviewerDashboard.component';
 import { LoginComponent } from './Modules/LoginDashboard/Login.component';
 import { CompanyDetailsComponent } from './Modules/CompanyDetails/CompanyDetails.component';
+import { InterviewerProfileComponent } from './Controls/Interviewer Profile view/interviewerprofileview.component';
 
 
 
@@ -17,7 +18,9 @@ const routes: Routes = [
   { path: 'report', component: ViewReportsComponent },
   { path: '', component: LoginComponent },
   { path: 'interviewer', component: InterViewerDashboardComponent },
-  { path: 'CompanyDetails', component: CompanyDetailsComponent }, 
+  { path: 'interviewerProfile', component: InterviewerProfileComponent },
+  { path: 'CompanyDetails', component: CompanyDetailsComponent },
+  
 
 
 ];

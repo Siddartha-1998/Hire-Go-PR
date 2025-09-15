@@ -106,5 +106,6 @@ export class DashboardComponent implements OnInit {
   }
   logout() {
     this.router.navigate(['']);
+    localStorage.setItem('SessionID','')
   }
 }

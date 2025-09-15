@@ -59,9 +59,9 @@ namespace Hire_Go_Server
                     }
                     else if(login.Type == "Interviewer Register")
                     {
-                        InterviewerLogins InterviewerLogins = new InterviewerLogins();
-                        InterviewerLogins.UserName = login.UserID;
-                        InterviewerLogins.PasswordHash = login.Password;
+                        InterviewerLogin InterviewerLogins = new InterviewerLogin();
+                        InterviewerLogins.Username = login.UserID;
+                        InterviewerLogins.Password = login.Password;
                         _ctx.InterviewerLogins.Add(InterviewerLogins);
                         _ctx.SaveChanges();
                         LoginAccess = "Account Added SuccessFully!";
@@ -69,17 +69,17 @@ namespace Hire_Go_Server
                     }
                     else
                     {
-                        var criteria = _ctx.InterviewerLogins.Where(c => c.UserName == login.UserID && c.PasswordHash == login.Password).FirstOrDefault();
+                        var criteria = _ctx.InterviewerLogins.Where(c => c.Username == login.UserID && c.Password == login.Password).FirstOrDefault();
                         if (criteria != null)
                         {
-                            LoginAccess = "Granted";
+                            LoginAccess = criteria.ID.ToString();
                         }
 
                     }
 
                 }
             }
-            return JsonConvert.SerializeObject(company);
+            return null;
         }
 
         public string FetchAll(string obj, string classname)

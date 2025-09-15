@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Project1.Server;
 using Project1.Server.BussinessLayer;
@@ -10,11 +9,10 @@ public class HostController : ControllerBase
 {
     Context _ctx = new Context();
     [HttpGet]
-    public IActionResult Get(string className, string obj,string type)
+    public IActionResult Get(string className, string obj, string type)
     {
         IBussinessinterface instance = null;
         string result = string.Empty;
-        
 
         if (className != null)
         {
@@ -49,13 +47,13 @@ public class HostController : ControllerBase
                     result = instance.Single(obj, className);
                     break;
             }
-
         }
-       this.ContextSavechanges();
+        _ctx.SaveChanges();
         return Ok(result);
     }
-    public void ContextSavechanges()
-    {
-        _ctx.SaveChanges();
-    }
+
+
+
 }
+
+

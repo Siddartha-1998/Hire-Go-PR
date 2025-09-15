@@ -4,7 +4,8 @@ public class Context : DbContext
 {
     public DbSet<LoginSessionDetails> loginsessionDetails { get; set; }
     public DbSet<company_details> company_details { get; set; }
-    public DbSet<InterviewerLogins> InterviewerLogins { get; set; }
+    public DbSet<InterviewerLogin> InterviewerLogins { get; set; }
+    public DbSet<InterviewerProfile> InterviewerProfileDetails { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -22,11 +23,12 @@ public class Context : DbContext
             .WithOne(ls => ls.CompanyDetails)
             .HasForeignKey<company_details>(cd => cd.LoginSessionID)
             .OnDelete(DeleteBehavior.Cascade);
-        modelBuilder.Entity<InterviewerLogins>()
-        .ToTable("InterviewerLogin")
-         .Property(p => p.Id)
-        .ValueGeneratedOnAdd();
-        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<InterviewerLogin>()
+    .HasOne(login => login.ProfileDetails)
+    .WithOne(profile => profile.InterviewerLogin)
+    .HasForeignKey<InterviewerProfile>(profile => profile.InterviewerID);
+
+
     }
 
 

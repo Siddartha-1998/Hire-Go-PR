@@ -1,0 +1,28 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <img [src]="profile.avatarUrl || 'assets/default-avatar.png'" alt="Profile Picture" class="profile-pic">
+    <div class="profile-basic">
+      <h2>{{ profile.Name }}</h2>
+    </div>
+  </div>
+
+  <div class="profile-details">
+    <h3>Contact Information</h3>
+    <p><strong>Email:</strong> {{ profile.Email }}</p>
+    <p><strong>Phone:</strong> {{ profile.PhoneNumber }}</p>
+
+    <h3>Professional Summary</h3>
+    <p>{{ profile.summary }}</p>
+
+    <h3>Skills</h3>
+    <ul>
+      <li *ngFor="let skill of profile.skills">{{ skill }}</li>
+    </ul>
+  </div>
+
+  <div class="profile-actions">
+    <button (click)="editProfile()" class="btn">Edit Profile</button>
+    <button (click)="downloadResume()" class="btn">Download Resume</button>
+    <button (click)="sendEmail()" class="btn">Send Email</button>
+  </div>
+</div>

@@ -12,6 +12,7 @@ import { LoginComponent } from "./Modules/LoginDashboard/Login.component";
 import { ViewReportsComponent } from "./Modules/Reports/viewReports.component";
 import { CompanyDetailsComponent } from "./Modules/CompanyDetails/CompanyDetails.component";
 import { Interviewercomponent } from "./Controls/Interviewer side nav/Interviewer.component";
+import { InterviewerProfileComponent } from "./Controls/Interviewer Profile view/interviewerprofileview.component";
 
 
 
@@ -24,7 +25,8 @@ import { Interviewercomponent } from "./Controls/Interviewer side nav/Interviewe
         LoginComponent,
     InterViewerDashboardComponent,
     CompanyDetailsComponent,
-    Interviewercomponent
+    Interviewercomponent,
+    InterviewerProfileComponent
 
     ],
     imports: [
