@@ -8,6 +8,7 @@ namespace Hire_Go_Server
     {
         Context _ctx = new Context();
         public string LoginAccess { get; set; }
+        public string RoleName { get; set; }
         List<company_details> company = new List<company_details>();
         public string Delete(string obj, string classname)
         {
@@ -39,6 +40,7 @@ namespace Hire_Go_Server
                                     Roles = companydetails.Roles,
                                 });
                             }
+                            RoleName = criteria.Type??string.Empty;
                         }
                         else
                         {

@@ -74,15 +74,23 @@ export class LoginComponent {
         const parsedResponse = JSON.parse(response)
         this.enableLoader = false;
         if (parsedResponse != undefined && parsedResponse.LoginAccess.includes("Granted") && this.loginText == "Admin Login") {
-          localStorage.setItem('Session', parsedResponse);
-          sessionStorage.setItem('Session', parsedResponse);
-          this.router.navigate(['dashboard']);
+          if (parsedResponse.RoleName == "Admin") {
+            localStorage.setItem('Session', parsedResponse);
+            sessionStorage.setItem('Session', parsedResponse);
+            this.router.navigate(['dashboard']);
+          }
+          else {
+            alert("Page is in Devlopment !")
+          }
         }
         else {
           if (parsedResponse != undefined && this.loginText == "Interviewer Login") {
             localStorage.setItem('SessionID', parsedResponse.LoginAccess);
             sessionStorage.setItem('SessionID', parsedResponse.LoginAccess);
             this.router.navigate(['interviewer']);
+          }
+          else if (parsedResponse.LoginAccess.includes("Denied")) {
+            alert("Login is Failed !")
           }
           else {
             alert("Login is added successfully !")

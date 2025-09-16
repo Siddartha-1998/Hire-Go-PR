@@ -51,6 +51,7 @@ namespace Hire_Go_Server
                     login.ID = Guid.NewGuid();
                     login.UserID = companydetail.UserName;
                     login.Password = companydetail.Password;
+                    login.Type = companydetail.Roles;
                     _ctx.loginsessionDetails.Add(login);
                     company_details company = new company_details();
                     company.CompanyID = Guid.NewGuid();
@@ -59,6 +60,7 @@ namespace Hire_Go_Server
                     company.CompanyDetails = companydetail.CompanyDetails;
                     company.Roles = companydetail.Roles;
                     company.UserName = companydetail.UserName;
+                    company.Password = companydetail.Password;
                     _ctx.company_details.Add(company);
                     _ctx.SaveChanges();
                 }
