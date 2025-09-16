@@ -9,7 +9,7 @@
   </div>
 
   <!-- Main Content -->
-  <div class="main-content" [class.menu-open]="isMenuOpen">
+  <div class="main-content" [class.menu-open]="isMenuOpen" *ngIf="!addnewprofile">
     <button class="btn-primary" (click)="logout()">🚪 Logout</button>
 
     <div class="header">
@@ -57,14 +57,6 @@
 <div *ngIf="addnewprofile">
   <app-Interviewer></app-Interviewer>
 </div>
-
-
-<!-- Profile Section -->
-<div *ngIf="addnewprofile">
-  <app-Interviewer></app-Interviewer>
-</div>
-
-
 <style>
   /* Base styling */
   body {
