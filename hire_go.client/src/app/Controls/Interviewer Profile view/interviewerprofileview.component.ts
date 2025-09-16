@@ -20,7 +20,9 @@ export class InterviewerProfileComponent implements OnInit {
   //  avatarUrl: ""
   //};
 
-  profile :any = []
+  Name: string = '';
+  Email: string = '';
+  PhoneNumber: string = '';
 
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
 
@@ -31,7 +33,16 @@ export class InterviewerProfileComponent implements OnInit {
     this.CoreDataservice.ServerCall("InterViewerdemographics", JSON.stringify(session), "Fetchall")
       .subscribe((response: any) => {
         const parsedResponse = JSON.parse(response);
-        this.profile = parsedResponse;
+        for (let key in parsedResponse) {
+          if (parsedResponse.hasOwnProperty(key)) {
+            this.Name = parsedResponse[key].Name;
+            this.Email = parsedResponse[key].Email;
+            this.PhoneNumber = parsedResponse[key].PhoneNumber;
+
+
+          }
+        }
+
       });
   }
 
@@ -46,6 +57,10 @@ export class InterviewerProfileComponent implements OnInit {
   }
 
   sendEmail() {
-    window.location.href = `mailto:${this.profile.email}`;
+    //window.location.href = `mailto:${this.profile.email}`;
+  }
+  logout() {
+    this.router.navigate(['']);
   }
 }
+

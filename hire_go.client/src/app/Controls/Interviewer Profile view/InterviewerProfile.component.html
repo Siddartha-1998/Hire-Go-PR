@@ -1,22 +1,24 @@
+
+<button class="btn-primary" (click)="logout()">🚪 Logout</button>
 <div class="profile-container">
   <div class="profile-header">
-    <img [src]="profile.avatarUrl || 'assets/default-avatar.png'" alt="Profile Picture" class="profile-pic">
+    <!--<img [src]="profile.avatarUrl || 'assets/default-avatar.png'" alt="Profile Picture" class="profile-pic">-->
     <div class="profile-basic">
-      <h2>{{ profile.Name }}</h2>
+      <h2>{{ Name }}</h2>
     </div>
   </div>
 
   <div class="profile-details">
     <h3>Contact Information</h3>
-    <p><strong>Email:</strong> {{ profile.Email }}</p>
-    <p><strong>Phone:</strong> {{ profile.PhoneNumber }}</p>
+    <p><strong>Email:</strong> {{ Email }}</p>
+    <p><strong>Phone:</strong> {{ PhoneNumber }}</p>
 
     <h3>Professional Summary</h3>
-    <p>{{ profile.summary }}</p>
+    <!--<p>{{ profile.summary }}</p>-->
 
     <h3>Skills</h3>
     <ul>
-      <li *ngFor="let skill of profile.skills">{{ skill }}</li>
+      <!-- <li *ngFor="let skill of profile.skills">{{ skill }}</li>-->
     </ul>
   </div>
 
