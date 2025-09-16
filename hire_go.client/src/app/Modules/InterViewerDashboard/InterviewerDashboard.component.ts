@@ -19,10 +19,15 @@ export class InterViewerDashboardComponent implements OnInit {
   Email: string = '';
   PhoneNumber: string = '';
   skills: string = '';
+
+  searchText: string = '';
+  selectedExperience: string = '';
+  filteredProfiles :any;
+  filteredJobs: any;
+  experienceLevels: any = [];
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
 
   isMenuOpen: boolean = true;
-  searchText: string = '';
   ngOnInit(): void {
     let session = [];
     var SessionID = localStorage.getItem('SessionID')
@@ -58,5 +63,12 @@ export class InterViewerDashboardComponent implements OnInit {
 
   logout() {
     this.router.navigate(['']);
+  }
+  applyFilters() {
+    
+  }
+
+  applyJob(job: any) {
+    alert(`You have applied for ${job.title}`);
   }
 }

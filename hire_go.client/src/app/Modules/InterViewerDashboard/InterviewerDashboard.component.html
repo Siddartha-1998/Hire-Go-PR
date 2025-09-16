@@ -1,12 +1,5 @@
-<div class="main-content" [class.menu-open]="isMenuOpen">
-  <button class="btn-primary" (click)="logout()">🚪 Logout</button>
-</div>
-
-<h5>Welcome to Dashboard {{ Name }}</h5>
-<p>
-  Skills : {{skills}}
-</p>
 <div>
+  <!-- Sidebar -->
   <div class="sidebar" [class.active]="isMenuOpen" *ngIf="!Menuhidden">
     <div class="hamburger" (click)="toggleMenu()">☰</div>
     <ul class="menu-items">
@@ -16,7 +9,48 @@
   </div>
 
   <!-- Main Content -->
+  <div class="main-content" [class.menu-open]="isMenuOpen">
+    <button class="btn-primary" (click)="logout()">🚪 Logout</button>
 
+    <div class="header">
+      <h2>Welcome to Dashboard, {{ Name }}</h2>
+      <div class="filters">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search by job title..." (input)="applyFilters()">
+        <select [(ngModel)]="selectedExperience" (change)="applyFilters()">
+          <option value="">Select Experience</option>
+          <option *ngFor="let exp of experienceLevels" [value]="exp">{{ exp }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="skills-display">
+      <strong>Skills:</strong> {{ skills }}
+    </div>
+
+    <!-- Jobs Listing -->
+    <div class="grid-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Experience</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let job of filteredJobs">
+            <td>{{ job.title }}</td>
+            <td>{{ job.experience }}</td>
+            <td>{{ job.location }}</td>
+            <td>{{ job.description }}</td>
+            <td><button class="btn-apply" (click)="applyJob(job)">Apply</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <!-- Profile Section -->
@@ -24,33 +58,34 @@
   <app-Interviewer></app-Interviewer>
 </div>
 
-<style>
 
+<!-- Profile Section -->
+<div *ngIf="addnewprofile">
+  <app-Interviewer></app-Interviewer>
+</div>
+
+
+<style>
+  /* Base styling */
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-  }
-
-  h1 {
-    text-align: center;
-    margin-top: 20px;
-    color: #333;
   }
 
   /* Sidebar */
   .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* initially hidden */
+    left: -250px;
     width: 250px;
     height: 100%;
-    background: #2f2f2f;
-    color: white;
+    background-color: #1f1f1f;
+    color: #fff;
     transition: left 0.3s ease;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
     z-index: 1000;
   }
 
@@ -58,18 +93,17 @@
       left: 0;
     }
 
-  /* Hamburger */
   .hamburger {
-    font-size: 30px;
+    font-size: 28px;
     cursor: pointer;
-    padding: 15px;
+    padding: 12px;
     position: fixed;
     top: 20px;
     left: 20px;
-    background: #2f2f2f;
-    border-radius: 5px;
+    background: #1f1f1f;
+    border-radius: 6px;
     color: white;
-    transition: background 0.3s ease, left 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 1100;
   }
 
@@ -78,28 +112,27 @@
   }
 
   .hamburger:hover {
-    background: #444;
+    background: #333;
   }
-
 
   .menu-items {
     list-style: none;
     padding: 0;
-    margin-top: 40px;
+    margin-top: 50px;
   }
 
     .menu-items li {
       padding: 15px 10px;
       cursor: pointer;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       transition: background 0.3s ease;
     }
 
       .menu-items li:hover {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
       }
 
-  /* Main Content */
+  /* Main content */
   .main-content {
     margin-left: 0;
     transition: margin-left 0.3s ease;
@@ -110,35 +143,100 @@
       margin-left: 250px;
     }
 
-  .content-body {
-    margin-top: 20px;
-    font-size: 18px;
+  /* Header and filters */
+  .header {
     text-align: center;
+    margin-bottom: 20px;
   }
 
-  /* Logout Button */
-  .btn-primary {
-    padding: 10px 20px;
-    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    .header h2 {
+      margin-bottom: 15px;
+    }
+
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+    .filters input,
+    .filters select {
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+  .skills-display {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  /* Table styling */
+  /* Grid Container */
+  .grid-container {
+    overflow-x: auto;
+    margin-top: 20px;
+    margin-left:25px;
+    max-width: 100%;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px; /* smaller text size */
+  }
+
+    table th, table td {
+      padding: 8px 10px; /* smaller padding */
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #f4f4f4;
+      font-weight: 600;
+    }
+
+    table tr:hover {
+      background-color: #f9f9f9;
+    }
+
+  /* Apply Button */
+  .btn-apply {
+    padding: 5px 10px;
+    background-color: #4caf50;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     color: white;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    float: right;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: background 0.3s ease;
+    font-size: 13px;
   }
 
-    .btn-primary:hover {
-      background: linear-gradient(45deg, #ff416c, #ff1a3c);
-      transform: scale(1.05);
+    .btn-apply:hover {
+      background-color: #45a049;
     }
 
-    .btn-primary:active {
-      transform: scale(0.95);
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    table {
+      font-size: 12px;
     }
 
-  /* Responsive */
+    .btn-apply {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+  }
+
+
+  /* Responsive adjustments */
   @media (max-width: 768px) {
     .main-content.menu-open {
       margin-left: 200px;
@@ -147,5 +245,11 @@
     .sidebar {
       width: 200px;
     }
+
+    .filters {
+      flex-direction: column;
+      gap: 8px;
+    }
   }
+
 </style>
