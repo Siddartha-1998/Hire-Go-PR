@@ -1,30 +1,192 @@
+<button class="logout-btn" (click)="logout()">🚪 Logout</button>
 
-<button class="btn-primary" (click)="logout()">🚪 Logout</button>
+
 <div class="profile-container">
   <div class="profile-header">
-    <!--<img [src]="profile.avatarUrl || 'assets/default-avatar.png'" alt="Profile Picture" class="profile-pic">-->
+    <img [src]="'assets/default-avatar.png'" alt="Profile Picture" class="profile-pic">
     <div class="profile-basic">
-      <h2>{{ Name }}</h2>
+      <h2 *ngIf="!isEditMode">{{ Name }}</h2>
+      <input *ngIf="isEditMode" [(ngModel)]="Name" placeholder="Enter name" class="input-field">
     </div>
   </div>
 
   <div class="profile-details">
     <h3>Contact Information</h3>
-    <p><strong>Email:</strong> {{ Email }}</p>
-    <p><strong>Phone:</strong> {{ PhoneNumber }}</p>
+    <div *ngIf="!isEditMode">
+      <p><strong>Email:</strong> {{ Email }}</p>
+      <p><strong>Phone:</strong> {{ PhoneNumber }}</p>
+    </div>
+    <div *ngIf="isEditMode">
+      <label>Email:</label>
+      <input [(ngModel)]="Email" placeholder="Enter email" class="input-field">
+
+      <label>Phone:</label>
+      <input [(ngModel)]="PhoneNumber" placeholder="Enter phone number" class="input-field">
+    </div>
 
     <h3>Professional Summary</h3>
-    <!--<p>{{ profile.summary }}</p>-->
+    <p><!-- Add summary if needed --></p>
 
-    <h3>Skills</h3>
-    <ul>
-      <!-- <li *ngFor="let skill of profile.skills">{{ skill }}</li>-->
-    </ul>
+    <label>Skills:</label>
+    <textarea [(ngModel)]="skills" placeholder="Enter skills separated by commas" class="input-field" rows="4"></textarea>
+
   </div>
 
   <div class="profile-actions">
-    <button (click)="editProfile()" class="btn">Edit Profile</button>
+    <button *ngIf="!isEditMode" (click)="enableEdit()" class="btn">Edit Profile</button>
+    <button *ngIf="isEditMode" (click)="saveProfile()" class="btn">Save</button>
+    <button *ngIf="isEditMode" (click)="cancelEdit()" class="btn">Cancel</button>
+
     <button (click)="downloadResume()" class="btn">Download Resume</button>
     <button (click)="sendEmail()" class="btn">Send Email</button>
   </div>
 </div>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+  }
+
+  .profile-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+    .profile-container:hover {
+      transform: translateY(-5px);
+    }
+
+  .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .profile-basic h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+    .input-field:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      outline: none;
+    }
+
+  .profile-details h3 {
+    margin-top: 20px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+  }
+
+  .profile-details p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+
+  .profile-actions {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+  .btn {
+    background-color: #28a745;
+    color: white;
+  }
+
+    .btn:hover {
+      background-color: #218838;
+    }
+
+    .btn:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+
+  .logout-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+    .logout-btn:hover {
+      background-color: #c82333;
+    }
+
+  h3 {
+    text-align: left;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+    ul li {
+      list-style-type: disc;
+      margin-bottom: 5px;
+    }
+
+  @media (max-width: 600px) {
+    .profile-container {
+      margin: 20px;
+      padding: 15px;
+    }
+
+    .btn {
+      width: 100%;
+      margin: 8px 0;
+    }
+  }
+</style>

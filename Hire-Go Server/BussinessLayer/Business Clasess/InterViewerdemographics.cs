@@ -64,6 +64,7 @@ namespace Hire_Go_Server
                     datafound.Email = item.Email;
                     datafound.PhoneNumber = item.phone;
                     datafound.InterviewerID = item.sessionID;
+                    datafound.Skills = item.Skills;
                     _ctx.InterviewerProfileDetails.Update(datafound);
                     _ctx.SaveChanges();
                 }
@@ -74,7 +75,15 @@ namespace Hire_Go_Server
                     interviewerProfile.Email = item.Email;
                     interviewerProfile.PhoneNumber = item.phone;
                     interviewerProfile.InterviewerID = item.sessionID;
-                    _ctx.InterviewerProfileDetails.Add(interviewerProfile);
+                    if (item.Skills != null)
+                    {
+                        interviewerProfile.Skills = item.Skills;
+                    }
+                    else
+                    {
+                        interviewerProfile.Skills = string.Empty;
+                    }
+                        _ctx.InterviewerProfileDetails.Add(interviewerProfile);
                     _ctx.SaveChanges();
                 }
 
@@ -110,6 +119,8 @@ namespace Hire_Go_Server
         public String phone { get; set; }
         public String profilePicUrl { get; set; }
         public String resume { get; set; }
+
+        public String Skills { get; set; }
         public Guid sessionID { get; set; }
     }
 }

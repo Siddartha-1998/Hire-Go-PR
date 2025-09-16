@@ -1,10 +1,14 @@
+<div class="main-content" [class.menu-open]="isMenuOpen">
+  <button class="btn-primary" (click)="logout()">🚪 Logout</button>
+</div>
 
+<h5>Welcome to Dashboard {{ Name }}</h5>
+<p>
+  Skills : {{skills}}
+</p>
 <div>
   <div class="sidebar" [class.active]="isMenuOpen" *ngIf="!Menuhidden">
     <div class="hamburger" (click)="toggleMenu()">☰</div>
-    <!--<div class="sidebar-header">
-      <button class="close-btn" (click)="toggleMenu()">×</button>
-    </div>-->
     <ul class="menu-items">
       <li (click)="goToAddProfile()">➕ Add Profile Details</li>
       <li (click)="goToViewProfile()">👤 View Profile</li>
@@ -12,37 +16,41 @@
   </div>
 
   <!-- Main Content -->
-  <div class="main-content" [class.menu-open]="isMenuOpen">
-    <button class="btn-primary" (click)="logout()" style="float:right">🚪 Logout</button>
 
-  </div>
 </div>
+
+<!-- Profile Section -->
 <div *ngIf="addnewprofile">
   <app-Interviewer></app-Interviewer>
 </div>
+
 <style>
-  .hamburger {
-    font-size: 30px;
-    cursor: pointer;
-    padding: 15px;
-    position: fixed;
-    top: -5px;
-    left: -10px;
-    z-index: 1100;
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Sidebar Menu */
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+  }
+
+  /* Sidebar */
   .sidebar {
     position: fixed;
     top: 0;
-    left: -250px;
+    left: -250px; /* initially hidden */
     width: 250px;
     height: 100%;
-    background: grey;
+    background: #2f2f2f;
     color: white;
     transition: left 0.3s ease;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
     z-index: 1000;
   }
 
@@ -50,40 +58,41 @@
       left: 0;
     }
 
-  .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .close-btn {
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    color: white;
+  /* Hamburger */
+  .hamburger {
+    font-size: 30px;
     cursor: pointer;
+    padding: 15px;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #2f2f2f;
+    border-radius: 5px;
+    color: white;
+    transition: background 0.3s ease, left 0.3s ease;
+    z-index: 1100;
   }
 
-  .search-container {
-    margin: 20px 0;
+  .sidebar.active ~ .hamburger {
+    left: 270px;
   }
 
-    .search-container input {
-      width: 100%;
-      padding: 8px;
-      border-radius: 6px;
-      border: none;
-    }
+  .hamburger:hover {
+    background: #444;
+  }
+
 
   .menu-items {
     list-style: none;
     padding: 0;
+    margin-top: 40px;
   }
 
     .menu-items li {
-      padding: 27px 0 0;
+      padding: 15px 10px;
       cursor: pointer;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      transition: background 0.3s ease;
     }
 
       .menu-items li:hover {
@@ -92,8 +101,8 @@
 
   /* Main Content */
   .main-content {
-    transition: margin-left 0.3s ease;
     margin-left: 0;
+    transition: margin-left 0.3s ease;
     padding: 20px;
   }
 
@@ -101,7 +110,13 @@
       margin-left: 250px;
     }
 
-  /* Style the Logout Button */
+  .content-body {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  /* Logout Button */
   .btn-primary {
     padding: 10px 20px;
     background: linear-gradient(45deg, #ff4b2b, #ff416c);
@@ -110,11 +125,27 @@
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease;
+    float: right;
+    transition: background 0.3s ease, transform 0.2s ease;
   }
 
     .btn-primary:hover {
       background: linear-gradient(45deg, #ff416c, #ff1a3c);
+      transform: scale(1.05);
     }
-</style>
 
+    .btn-primary:active {
+      transform: scale(0.95);
+    }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .main-content.menu-open {
+      margin-left: 200px;
+    }
+
+    .sidebar {
+      width: 200px;
+    }
+  }
+</style>

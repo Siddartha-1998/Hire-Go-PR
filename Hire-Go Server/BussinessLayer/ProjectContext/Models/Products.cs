@@ -73,18 +73,21 @@ public class InterviewerProfile
 
     [Required]
     [StringLength(255)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [Required]
     [StringLength(255)]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     [StringLength(255)]
-    public string Resume { get; set; }
+    public string? Resume { get; set; }
 
     [StringLength(255)]
-    public string ProfilePic { get; set; }
-    public string PhoneNumber { get; set; }
+    public string? ProfilePic { get; set; }
+    public string? PhoneNumber { get; set; }
     // Navigation property for the one-to-one relationship
+    public string? Skills { get; set; }
+    
+
     public InterviewerLogin InterviewerLogin { get; set; }
 }

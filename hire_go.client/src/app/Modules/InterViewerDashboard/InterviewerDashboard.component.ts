@@ -11,14 +11,38 @@ import { CoredateService } from '../../../core/CoredateService';
   templateUrl: './InterviewerDashboard.component.html',
 
 })
-export class InterViewerDashboardComponent {
+export class InterViewerDashboardComponent implements OnInit {
   addnewprofile: boolean=false;
   Menuhidden: boolean = false;
+
+  Name: string = '';
+  Email: string = '';
+  PhoneNumber: string = '';
+  skills: string = '';
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
 
   isMenuOpen: boolean = true;
   searchText: string = '';
+  ngOnInit(): void {
+    let session = [];
+    var SessionID = localStorage.getItem('SessionID')
+    session.push(SessionID);
+    this.CoreDataservice.ServerCall("InterViewerdemographics", JSON.stringify(session), "Fetchall")
+      .subscribe((response: any) => {
+        const parsedResponse = JSON.parse(response);
+        for (let key in parsedResponse) {
+          if (parsedResponse.hasOwnProperty(key)) {
+            this.Name = parsedResponse[key].Name;
+            this.Email = parsedResponse[key].Email;
+            this.PhoneNumber = parsedResponse[key].PhoneNumber;
+            this.skills = parsedResponse[key].Skills;
 
+
+          }
+        }
+
+      });
+  }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -30,7 +54,6 @@ export class InterViewerDashboardComponent {
 
   goToViewProfile() {
     this.router.navigate(['interviewerProfile']);
-    alert("Navigate to View Profile page or section");
   }
 
   logout() {

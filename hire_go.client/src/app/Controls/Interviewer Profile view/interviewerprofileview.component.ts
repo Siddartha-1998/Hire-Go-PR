@@ -9,21 +9,10 @@ import { CoredateService } from "../../../core/CoredateService";
 })
 export class InterviewerProfileComponent implements OnInit {
 
-  //profile = {
-  //  name: "Jane Doe",
-  //  jobTitle: "Software Engineer",
-  //  location: "San Francisco, CA",
-  //  email: "jane.doe@example.com",
-  //  phoneNumber: "9876543210",
-  //  summary: "Passionate developer with 5+ years of experience in building web applications.",
-  //  skills: ["Angular", "TypeScript", "REST API", "Node.js"],
-  //  avatarUrl: ""
-  //};
-
   Name: string = '';
   Email: string = '';
   PhoneNumber: string = '';
-
+  skills: string = '';
   constructor(private http: HttpClient, private router: Router, public CoreDataservice: CoredateService) { }
 
   ngOnInit(): void {
@@ -38,6 +27,7 @@ export class InterviewerProfileComponent implements OnInit {
             this.Name = parsedResponse[key].Name;
             this.Email = parsedResponse[key].Email;
             this.PhoneNumber = parsedResponse[key].PhoneNumber;
+            this.skills = parsedResponse[key].Skills;
 
 
           }
@@ -46,21 +36,46 @@ export class InterviewerProfileComponent implements OnInit {
       });
   }
 
-  editProfile() {
-    alert('Edit profile clicked!');
-    // navigate to edit page or open modal
+  isEditMode: boolean = false;
+  originalData: any = {};
+
+  enableEdit() {
+    this.isEditMode = true;
+    // Save original data to allow canceling
+    this.originalData = {
+      Name: this.Name,
+      Email: this.Email,
+      PhoneNumber: this.PhoneNumber
+    };
+  }
+
+  saveProfile() {
+    this.isEditMode = false;
+    var SessionID = localStorage.getItem('SessionID')
+    let payload = [];
+    payload.push({ Name: this.Name, Email: this.Email, Phone: this.PhoneNumber, SessionID: SessionID,Skills :this.skills})
+    this.CoreDataservice.SaveCall("InterViewerdemographics", JSON.stringify(payload), "Insert")
+    console.log('Profile saved:', this.Name, this.Email, this.PhoneNumber);
+  }
+
+  cancelEdit() {
+    this.isEditMode = false;
+    // Revert changes
+    this.Name = this.originalData.Name;
+    this.Email = this.originalData.Email;
+    this.PhoneNumber = this.originalData.PhoneNumber;
+  }
+
+  logout() {
+    this.router.navigate(['']);
   }
 
   downloadResume() {
-    alert('Downloading resume...');
-    // implement file download logic here
+    console.log('Downloading resume...');
   }
 
   sendEmail() {
-    //window.location.href = `mailto:${this.profile.email}`;
-  }
-  logout() {
-    this.router.navigate(['']);
+    console.log('Sending email...');
   }
 }
 

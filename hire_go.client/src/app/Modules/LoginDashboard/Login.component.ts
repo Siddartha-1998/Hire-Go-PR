@@ -78,9 +78,6 @@ export class LoginComponent {
           sessionStorage.setItem('Session', parsedResponse);
           this.router.navigate(['dashboard']);
         }
-        else if (this.loginText != "Interviewer Login") {
-          alert("Invalid Logins !")
-        }
         else {
           if (parsedResponse != undefined && this.loginText == "Interviewer Login") {
             localStorage.setItem('SessionID', parsedResponse.LoginAccess);
@@ -88,6 +85,8 @@ export class LoginComponent {
             this.router.navigate(['interviewer']);
           }
           else {
+            alert("Login is added successfully !")
+            this.loginText = "Interviewer Login";
             this.router.navigate(['']);
           }
         }
